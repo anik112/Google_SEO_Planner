@@ -1,0 +1,17 @@
+ocument.getElementsByClassName('sso-tabs__el')[1].click();
+
+
+>> cookies 
+
+cookies forwww.semrush.com
+GCLB=CLOFvYWs2LK69QE, _pdst=c83e727c43a94aa38078b1b78adeafc0, lux_uid=163094412094911049
+
+
+cookies for .semrush.com
+PHPSESSID=cddf2d8cb8eddd476ee49a80a2f257c6
+
+cookies for .semrush.com
+SSO-JWT, eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjZGRmMmQ4Y2I4ZWRkZDQ3NmVlNDlhODBhMmYyNTdjNiIsImlhdCI6MTYzMDk0NDE0NCwiaXNzIjoic3NvIiwidWlkIjo2ODM5MjYyfQ.SuwbDHytb0nMPHOiKSQ59p9-16fIlnXgwHVdEXBEYtMPRGOqKUeRS8JtsG-qpVFOVA0rCv5zh5_1RlSSFpuP4Q
+
+sso_token,
+846a52ec3a46dc22e300dc733530c03a8a750d6db045533e18c575df833a44c8

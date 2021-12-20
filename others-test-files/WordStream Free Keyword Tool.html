@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">    <head>
+        <title>WordStream Free Keyword Tool</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        <link href="//fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+
+        <!-- Invisible Captcha Library -->
+        <script src="https://www.google.com/recaptcha/api.js?render=6Lftc40UAAAAAN1OleNkm2dFvvp4Jv0HB3ctDNC9" type="text/javascript"></script>
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="icon" id="favicon" data-bind="attr: {href: wordstream.constants.assetUrl + '/img/favicon.ico'}" type="image/png">
+        <link rel="dns-prefetch" href="//ajax.googleapis.com">
+        <link rel="dns-prefetch" href="//fonts.googleapis.com">
+
+        <!-- DO NOT REMOVE | required for main.js to work properly for unauthenticated users -->
+        <script>
+            var isWordstreamBasePage = true;
+        </script>
+        <!-- END DO NOT REMOVE -->
+
+            <meta name="robots" content="noindex">
+
+            
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-W7WSGJ3');</script>
+<!-- End Google Tag Manager -->
+
+            
+<!-- Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function()
+{ (i[r].q=i[r].q||[]).push(arguments)}
+,i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-6574172-1', 'auto');
+</script>
+<!-- End Google Analytics -->
+
+    <link href="https://s3.amazonaws.com/wordstream-static-asset-server/Production/css/0.e3fb8d35e9dd62a4a2ef.css" rel="stylesheet"><link href="https://s3.amazonaws.com/wordstream-static-asset-server/Production/css/1.5a0c0492a1871a22593f.css" rel="stylesheet"><link href="https://s3.amazonaws.com/wordstream-static-asset-server/Production/css/components.cdaf9a6c7b12ba775edc.css" rel="stylesheet"><link href="https://s3.amazonaws.com/wordstream-static-asset-server/Production/css/2.84dbee15cf915c23fa83.css" rel="stylesheet"><link href="https://s3.amazonaws.com/wordstream-static-asset-server/Production/css/3.fa663e37b9e8a2dd1a3d.css" rel="stylesheet"><link href="https://s3.amazonaws.com/wordstream-static-asset-server/Production/css/free-keyword-tool-app.1885ae807c36c1d0d6dd.css" rel="stylesheet"></head>
+
+    <body data-controller="freeKeywordTool" style="visibility:hidden" data-bind="style: {visibility: wordstream.isApplicationDataReady() ? 'visible' : 'hidden'}">
+        <div id="main-left" data-bind="css: {open: $root.slidePanelViewModel.isOpen}">
+            <div data-bind="if: wordstream.viewModelLocator.notificationManagerViewModel">
+                <div data-bind="with: wordstream.viewModelLocator.notificationManagerViewModel">
+                    <div id="notifications-container" class="notifications-container" data-bind="foreach: notifications, css: {ready: isReady}">
+                        <div class="notification-wrap" data-bind="attr: {id: guid}, css: {fade: fade}">
+                            <span class="notification">
+                                <span class="glyphicon glyphicon-ok margin-10-right"></span>
+                                <span data-bind="html: content"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div data-bind="if: wordstream.viewModelLocator.badOauthViewModel">
+                <div data-bind="with: wordstream.viewModelLocator.badOauthViewModel">
+                    <div data-bind="if: showBanner">
+                        <div id="bad-oauth-banner" data-bind="css: {'ready': isReady}">
+                            <span>Hmm, we're unable to connect to one or more of your ad platforms which can cause page errors. <a data-bind="attr:{href: fixConnectionLink}">Fix connection</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+     
+    <nav class="navbar navbar-inverse ws-top-nav ws-nav fkt-nav" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header clearfix">
+                <div class="nav navbar-nav navbar-left pull-left navbar-flex">
+                    <a href="https://www.wordstream.com"><div class="ws-logo-fkt"></div></a>
+                    <span class="small-nav-divide"></span>
+                    <a href="https://www.wordstream.com/keywords" style="text-decoration-line: none;"><div class="white-text">Free Keyword Tool</div></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+        <!-- ko with: fktAppViewModel -->
+        <div data-bind="css: mainClass" id="header" role="header">
+            <div data-bind="template: { name: fktHeaderTemplate }"></div>
+        </div>
+        <div data-bind="css: mainClass" id="main" role="main">
+            <div data-bind="template: { name: fktContentTemplate, afterRender: registerElements }"></div>
+        </div>
+        <!-- /ko -->
+<script type="text/html" id="fkt-search-form">
+    <form data-bind="submit: clickNewSearch">
+        <div class="container grid-form-outer-container">
+            <div class="grid-form-container">
+                <div class="grid-form-element" data-bind="validationElement: key">
+                    <label class="flex-label" for="keyword">Keyword or website URL
+                    </label>
+                    <div class="input-group">
+                        <input class="flex-input form-control data-hj-whitelist" type="search" name="keyword" id="keyword"
+                            data-bind="textInput: key">
+                        <span class="keyword-clear" data-bind="click: clearKey, visible: key">x</span>
+                    </div>
+                </div>
+                <div class="grid-form-element">
+                    <label class="flex-label" for="industry_code">Industry <span
+                            class="soft-message">optional</span></label>
+                    <select class="flex-input form-control" id="industry_code"
+                            data-bind="options: industries, value: industry, optionsText: 'name', valueAllowUnset: true"></select>
+                </div>
+                <div class="grid-form-element location" data-bind="validationElement: locationText">
+                    <label class="flex-label" for="location">Location <span
+                            class="soft-message">optional</span></label>
+                    <input class="flex-input form-control data-hj-whitelist" type="text" name ="location" id="location"
+                        data-bind="textInput: locationText">
+                </div>
+                <div class="grid-form-button">
+                    <label class="flex-label">&nbsp;</label>
+                    <button class="btn btn-info btn-bold flex-input new-search-btn form-control" id="new-search"
+                            data-bind="click: clickNewSearch, enable: searchButtonEnabled">NEW SEARCH
+                    </button>
+                </div>
+                <div class="grid-captcha-container">
+                    <div class="captcha-text" data-bind="html: captchaText"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</script>
+
+<script type="text/html" id="fkt-search-bar">
+    <div data-bind="template: { name: 'fkt-search-form' }" class="mobile-no-display"></div>
+    <div data-bind="template: { name: 'fkt-mobile-search-header-form' }" class="mobile-only-display"></div>
+</script>
+
+<script type="text/html" id="fkt-mobile-search-header-form">
+    <div data-bind="template: { name: mobileSearchTemplate }"></div>
+</script>
+
+<script type="text/html" id="fkt-mobile-search-form">
+    <div class="container mobile-container grid-form-outer-container">
+        <div class="grid-form-container-mobile">
+            <div class="grid-form-element-mobile">
+                <label class="flex-label" for="keyword">Keyword or website Url</label>
+                <input class="flex-input form-control data-hj-whitelist" type="text" name="keyword" id="keyword-mobile"
+                       data-bind="textInput: key">
+            </div>
+            <div class="grid-form-element-mobile">
+                <label class="flex-label" for="industry_code">Industry <span
+                        class="soft-message">optional</span></label>
+                <select class="flex-input form-control" id="industry_code_mobile"
+                        data-bind="options: industries, value: industry, optionsText: 'name'"></select>
+            </div>
+            <div class="grid-form-element-mobile">
+                <label class="flex-label" for="location-mobile">Location <span
+                        class="soft-message">optional</span></label>
+                <input class="flex-input form-control data-hj-whitelist" type="text" name="location-mobile" id="location-mobile"
+                       data-bind="textInput: locationText">
+            </div>
+            <div class="grid-form-element-row margin-10-top">
+                <label class="flex-label">&nbsp;</label>
+                <button class="btn btn-info btn-bold flex-input new-search-btn" id="new-search"
+                        data-bind="click: clickNewSearch, enable: searchButtonEnabled">NEW SEARCH
+                </button>
+                <label class="flex-label">&nbsp;</label>
+                <div class="btn btn-transparent-blue btn-bold flex-input" id="cancel-search"
+                     data-bind="click: cancelNewSearch">Cancel
+                </div>
+            </div>
+            <div class="grid-captcha-container">
+                <div class="captcha-text" data-bind="html: captchaText"></div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-mobile-search-bar">
+    <div class="container mobile-container">
+        <div class="row">
+            <div class="col-xs-10">
+                <div class="pagination-text">Showing <span data-bind="text: showTotal"></span> of <span
+                        data-bind="text: keywordTotal"></span> keywords for:
+                </div>
+                <div class="margin-10-top">
+                    <div class="btn btn-mobile-pill" data-bind="click: showMobileSearchForm"><span
+                            data-bind="text: key"></span></div>
+                    <div class="btn btn-mobile-pill">
+                        <span data-bind="text: industryText, click: showMobileSearchForm"></span>
+                        <span class="gray-x"
+                              id="clear-industry-new-search"
+                              data-bind="click: clearIndustryAndNewSearch">&nbsp;&times;</span>
+                    </div>
+                    <div class="btn btn-mobile-pill">
+                        <span data-bind="text: locationText, click: showMobileSearchForm"></span>
+                        <span class="gray-x"
+                              id="clear-location-new-search"
+                              data-bind="click: clearLocationAndNewSearch">&nbsp;&times;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2 margin-20-top">
+                <i class="glyphicon glyphicon-pencil" data-bind="click: showMobileSearchForm"></i>
+            </div>
+        </div>
+    </div>
+    <div class="above-grid-warning-container" data-bind="visible: runningOutOfSearches">
+        <span class="searches-remaining-text" data-bind="html: remainingSearchCount"></span>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-loading-template">
+    <div data-bind="template: { name: 'fkt-grid-mobile-loading-template' }" class="mobile-only-display"></div>
+    <div data-bind="template: { name: 'fkt-grid-loading-template' }" class="mobile-no-display"></div>
+    <div data-bind="template: { name: 'fkt-email-modal-template', data: emailModalViewModel }"></div>
+</script>
+
+<script type="text/html" id="fkt-grid-mobile-loading-template">
+    <div class="mobile-results-container">
+        <div class="expander-bar">
+            <span class="pagination-waiting-text" data-bind="hidden: showKeywords"></span>
+            <span class="pagination-text" data-bind="visible: showKeywords">Sorted by: Google Ads Search Volume</span>
+            <span class="expander-box-chevron-blob" data-bind="hidden: showKeywords"></span>
+            <span class="pull-right"
+                  data-bind="click: toggleAllKeywords, css: globalChevronCss, visible: showKeywords"></span>
+        </div>
+        <div class="keyword-waiting-results-container" data-bind="ifnot: showKeywords">
+            <div class="keyword-waiting-results" data-bind="foreach: waitingArray">
+                <div class="gray-blob"></div>
+            </div>
+        </div>
+        <div class="keyword-results-container" data-bind="if: showKeywords">
+            <div class="keyword-results" data-bind="foreach: keywordData">
+                <div class="keyword-result"
+                     data-bind="click: $parent.toggleKeyword, css: { 'light-gray-bottom-border': !show() }">
+                    <span data-bind="text: keywordText, css: keywordCss"></span>
+                    <span class="glyphicon pull-right" data-bind="css: chevronCss"></span>
+                </div>
+                <div class="keyword-result-details light-gray-bottom-border" data-bind="visible: show">
+                    <div class="row margin-5-bottom">
+                        <div class="col-xs-5 no-padding">
+                            <span class="text-dashed-underline" data-toggle="tooltip"
+                                  data-bind="attr: { title: $parent.toolTipText.mobile.searchVolume }">Search volume</span>
+                        </div>
+                        <div class="col-xs-4 flex-inline-center no-padding">
+                            <span class="google-icon">&nbsp;</span>
+                            <span data-bind="text: adwords.searchVolume"></span>
+                        </div>
+                        <div class="col-xs-3 flex-inline-center no-padding">
+                            <span class="bing-icon">&nbsp;</span>
+                            <!-- ko if: bing_ads.searchVolume -->
+                                <span data-bind="text: bing_ads.searchVolume"></span>
+                            <!-- /ko -->
+                            <!-- ko ifnot: bing_ads.searchVolume -->
+                                <span data-bind="text: '--'"></span>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="row margin-5-bottom">
+                        <div class="col-xs-5 no-padding">
+                            <span class="text-dashed-underline" data-toggle="tooltip"
+                                  data-bind="attr: { title: $parent.toolTipText.mobile.cpc }">CPC</span>
+                        </div>
+                        <div class="col-xs-4 flex-inline-center no-padding">
+                            <span class="google-icon">&nbsp;</span>
+                            <span data-bind="text: adwords.averageCpc"></span>
+                        </div>
+                        <div class="col-xs-3 flex-inline-center no-padding">
+                            <span class="bing-icon">&nbsp;</span>
+                            <!-- ko if: bing_ads.averageCpc -->
+                                <span data-bind="text: bing_ads.averageCpc"></span>
+                            <!-- /ko -->
+                            <!-- ko ifnot: bing_ads.averageCpc -->
+                                <span data-bind="text: '--'"></span>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-5 no-padding">
+                            <span class="text-dashed-underline" data-toggle="tooltip"
+                                  data-bind="attr: { title: $parent.toolTipText.mobile.competition }">Competition</span>
+                        </div>
+                        <div class="col-xs-4 flex-inline-center no-padding">
+                            <span class="google-icon">&nbsp;</span>
+                            <span data-bind="text: adwords.competition"></span>
+                        </div>
+                        <div class="col-xs-3 flex-inline-center no-padding">
+                            <span class="bing-icon">&nbsp;</span>
+                            <!-- ko if: bing_ads.competition -->
+                                <span data-bind="text: bing_ads.competition"></span>
+                            <!-- /ko -->
+                            <!-- ko ifnot: bing_ads.competition -->
+                                <span data-bind="text: '--'"></span>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-grid-loading-template">
+    <div class="fixed-popout" id="trial-popout">
+        <span class="ccw-text">Put your keywords to work!</span>
+        <div class="popout-content">
+            <div class="popout-text">
+                <div><strong>Nice keywords! Now, use them to unlock more growth for your business—the easy way.</strong></div>
+                <div>Drive more leads and revenue in less time with WordStream Advisor's online advertising tools.</div>
+            </div>
+            <button class="btn btn-warning btn-small-bold-text margin-35-top" data-bind="click: openTrialFromPopout" id="popout-free-trial">
+                <strong>TRY WORDSTREAM ADVISOR FOR FREE</strong>
+            </button>
+            <img class="popout-illustration" data-bind="attr: {src: wordstream.constants.assetUrl + '/img/free_keyword_tool/popout_illustration.svg'}">
+        </div>
+    </div>
+    <div class="container grid-results-outer-container">
+        <div data-bind="ifnot: bingServesCountry">
+            <div class="above-grid-warning-container">
+                <span class="no-bing-data-header">Looking for Bing Ads data?</span>
+                <span class="no-bing-data-text">&nbsp;The selected location is currently only supported by Google Ads.</span>
+            </div>
+        </div>
+        <div class="above-grid-warning-container" data-bind="visible: runningOutOfSearches">
+            <span class="searches-remaining-text" data-bind="html: remainingSearchCount"></span>
+        </div>
+        <div class="grid-results-container">
+            <div class="sticky-row" data-bind="css: { 'drop-shadow': showGridDropShadow }">
+                <div class="header-row" id="header-row">
+                    <!-- Header Rows -->
+                    <div class="row margin-30-bottom">
+                        <div class="col-xs-9">
+                            <div class="status-text" data-bind="html: keywordCount, css: statusTextClass"></div>
+                        </div>
+                        <div class="col-xs-3">
+                            <span class="pull-right">
+                                <div class="btn btn-warning form-control grid-email-keywords-btn"
+                                    id="email-my-keywords" data-bind="click: openEmailModal, enable: showKeywords">EMAIL ALL MY KEYWORDS
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    <div class="col-hdr-text keyword-col">
+                                        <span>Keywords</span>
+                                    </div>
+                                </div>
+                                <div data-bind="css: googleColHdrClass">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <div class="col-hdr-text">
+                                                <span class="google-icon"></span>
+                                                <span class="text-dashed-underline sort-by-hdr" data-toggle="tooltip"
+                                                      data-bind="attr: { title: toolTipText.google.searchVolume }">Search volume</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="col-hdr-text">
+                                                <span class="google-icon"></span>
+                                                <span class="text-dashed-underline" data-toggle="tooltip"
+                                                      data-bind="attr: { title: toolTipText.google.cpc }">CPC</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="col-hdr-text">
+                                                <span class="google-icon"></span>
+                                                <span class="text-dashed-underline" data-toggle="tooltip"
+                                                      data-bind="attr: { title: toolTipText.google.competition }">Competition</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div data-bind="if: bingServesCountry" class="col-xs-5">
+                                    <div class="row">
+                                        <div class="col-xs-4">
+                                            <div class="col-hdr-text">
+                                                <span class="bing-icon"></span>
+                                                <span class="text-dashed-underline pointer" data-toggle="tooltip"
+                                                      data-bind="attr: { title: toolTipText.bing.searchVolume }">Search volume</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="col-hdr-text">
+                                                <span class="bing-icon"></span>
+                                                <span class="text-dashed-underline" data-toggle="tooltip"
+                                                      data-bind="attr: { title: toolTipText.bing.cpc }">CPC</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-4">
+                                            <div class="col-hdr-text">
+                                                <span class="bing-icon"></span>
+                                                <span class="text-dashed-underline" data-toggle="tooltip"
+                                                      data-bind="attr: { title: toolTipText.bing.competition }">Competition</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row data-row">
+                <span class="col-xs-12" data-bind='foreach: keywordData'>
+                    <div class="row" id="loading-grid">
+                        <div class="col-xs-2 cell-border-left">
+                            <span data-bind="text: $data.keywordText, css: $data.keywordCss"></span>
+                        </div>
+                        <div data-bind="css: $parent.googleColDataClass">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <span data-bind="text: $data.adwords.searchVolume, css: $data.adwords.css"></span>
+                                </div>
+                                <div class="col-xs-4">
+                                    <span data-bind="text: $data.adwords.averageCpc, css: $data.adwords.css"></span>
+                                </div>
+                                <div class="col-xs-4">
+                                    <span data-bind="text: $data.adwords.competition, css: $data.adwords.css"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-bind="if: $parent.bingServesCountry, css: $parent.bingColDataClass">
+                            <div class="row bing-row">
+                                <div class="col-xs-4">
+                                    <div data-bind="if: $data.bing_ads">
+                                        <span data-bind="text: $data.bing_ads.searchVolume, css: $data.bing_ads.css"></span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-4">
+                                    <span data-bind="if: $data.bing_ads">
+                                        <span data-bind="text: $data.bing_ads.averageCpc, css: $data.bing_ads.css"></span>
+                                    </span>
+                                </div>
+                                <div class="col-xs-4">
+                                    <span data-bind="if: $data.bing_ads">
+                                        <span data-bind="text: $data.bing_ads.competition, css: $data.bing_ads.css"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </span>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-email-modal-template">
+    <wordstream-modal id="fkt-email-modal-wrapper" params="viewModel: $data">
+        <div class="modal fade" id="fkt-email-modal" role="dialog" aria-hidden="true" data-backdrop="true"
+             data-keyboard="false">
+            <div class="modal-dialog modal-lg" data-bind="with: fktEmailViewModel">
+                <div class="modal-content modal-gray-footer" data-bind="template: {name: templateShown}">
+                </div>
+            </div>
+        </div>
+    </wordstream-modal>
+</script>
+
+<script type="text/html" id="fkt-email-page">
+    <div class="empty-modal-header mobile-only-display">
+        <button type="button" class="close" id='btn-close-fkt-email' data-bind="click: $parent.hideModal">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body-title">Get All the Keywords You Need to Succeed in Search&mdash;Straight to Your Inbox!
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div id="email-modal-left" class="col-sm-6 mobile-no-display">
+                    <div class="keyword-email-icon"></div>
+                </div>
+                <div id="email-modal-right" class="col-xs-12 col-sm-5 desktop-400">
+                    <form class="form right-column-email-form" target="_top" method="post" data-bind="submit: sendEmail">
+                        <div class="form-group margin-50-bottom" data-bind="validationElement: emailAddress">
+                            <label for="email-address">Email Address:</label>
+                            <input type="email" class="form-control" id="email-address"
+                                   data-bind="textInput: emailAddress" placeholder="Your Email" autocomplete="email">
+                            <div class="grid-captcha-container-email">
+                                <div class="captcha-text-email" data-bind="html: captchaText"></div>
+                            </div>
+                            <div class="grid-captcha-container-email" data-bind="if: isCanadian">
+                                <div class="captcha-text-email" data-bind="html: caslText"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="radio-group-label business-type-label">Are you researching keywords for your business or someone else?</div>
+                            <label class="radio-inline">
+                                <input type="radio" id="advertiserKeywords" name="business-type"
+                                       value="ADVERTISER" data-bind="checked: businessType"> My Business
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" id="agencyKeywords" name="business-type"
+                                       value="AGENCY" data-bind="checked: businessType"> My Client
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <button id="cancel-email-button" type="submit"
+                    class="btn btn-white submit-button mobile-no-display email-cancel"
+                    data-bind="click: $parent.hideModal">Cancel
+            </button>
+            <button id="email-keywords-button" type="submit"
+                    class="btn btn-warning submit-button"
+                    data-bind="click: sendEmail, enable: emailFormValidation.isValid()">Email my keyword list
+            </button>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-whats-next-page-mobile">
+    <div class="empty-modal-header">
+        <button type="button" class="close" id='btn-close-whats-next' data-bind="click: $parent.hideModal">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="on-your-way-balloons">You're on your way to search marketing success!</div>
+        <div class="whats-next-subtitle">
+            You'll get an email with your keywords from us soon. In the meantime, check out our other free resources:
+        </div>
+        <div>
+            <div class="keep-exploring">
+                <div class="keep-exploring-button" data-bind="click: goToGAPG">
+                    <div class="google-ads-grader-icon"></div>
+                    <div class="keep-exploring-text">Grade your Google Ads Account</div>
+                </div>
+                <div class="keep-exploring-button" data-bind="click: goToHackGoogleAds">
+                    <div class="hack-google-ads-icon"></div>
+                    <div class="keep-exploring-text">Learn 5 Keys to a Better Quality Score </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <span class="blue-text" data-bind="click: goToEmailForm">
+                    Didn't receive an email?
+                </span>
+            </div>
+            <div class="text-center margin-30-top">
+                <a target="_blank" data-bind="click: clickFktShareEmail, attr: { href: sendFktShareEmail, id: 'email-share-icon' }"><img data-bind="attr: {src: wordstream.constants.assetUrl + '/img/free_keyword_tool/share_icon_email.svg'}" class="social-share-icon"></a>
+                <a target="_blank" data-bind="click: clickFktShareLinkedIn, attr: { href: linkedInShareUrl, id: 'linkedin-share-icon' }"><img data-bind="attr: {src: wordstream.constants.assetUrl + '/img/free_keyword_tool/share_icon_linkedin.svg'}" class="social-share-icon"></a>
+                <a target="_blank" data-bind="click: clickFktShareFacebook, attr: { href: facebookShareUrl, id: 'facebook-share-icon' }"><img data-bind="attr: {src: wordstream.constants.assetUrl + '/img/free_keyword_tool/share_icon_fbook.svg'}" class="social-share-icon"></a>
+                <a target="_blank" data-bind="click: clickFktShareTwitter, attr: { href: twitterShareUrl, id: 'twitter-share-icon' }"><img data-bind="attr: {src: wordstream.constants.assetUrl + '/img/free_keyword_tool/share_icon_twitter.svg'}" class="social-share-icon"></a>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <button id="mobile-whats-next-done" type="submit"
+                    class="btn btn-warning submit-button"
+                    data-bind="click: $parent.hideModal">DONE
+            </button>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-whats-next-page-desktop">
+    <div class="modal-body">
+        <!-- ko if: sentEmail -->
+        <div class="congrats-well">
+            <div class="congrats-text">
+                <div class="congrats-bold">Congrats! You're on your way to search engine marketing success!</div>
+                <div style="font-size: 12px;">You'll get an email with your keywords from us soon. <span class="blue-text" data-bind="click: goToEmailForm">Didn't receive an email?</span></div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <div class="row">
+            <div class="col-xs-5 trial-benefits margin-50-top">
+                <div class="trial-illustration"></div>
+                <div>
+                    <div class="congrats-title">Level Up Your Keyword Game</div>
+                    <div class="congrats-text">Boost performance with powerful research tools and keyword suggestions</div>
+                </div>
+                <div>
+                    <div class="congrats-title">Streamline Everything</div>
+                    <div class="congrats-text">Manage your Google, Facebook, and Bing Ads with our one-stop-shop</div>
+                </div>
+                <div>
+                    <div class="congrats-title">Goodbye, Guesswork</div>
+                    <div class="congrats-text">Learn from your data with powerful reporting designed to help you grow</div>
+                </div>
+            </div>
+            <div class="col-xs-7 margin-20-top" data-bind="with: fktFreeTrialViewModel">
+                <div class="free-trial-cta">Try a free trial of WordStream Advisor</div>
+                <form id="fkt-free-trial-form" class="form margin-left-30 margin-right-30">
+                    <div class="form-group inline-block margin-30-right" data-bind="validationElement: $data.firstName">
+                        <label for="first-name" id="first-name-label">First Name</label>
+                        <div id="first-name-input-row" class="ws-form-input-row">
+                            <input id="first-name" class="form-control" name="firstname" type="text" data-bind="textInput: $data.firstName" />
+                        </div>
+                    </div>
+                    <div class="form-group inline-block" data-bind="validationElement: $data.lastName">
+                        <label for="last-name" id="last-name-label">Last Name</label>
+                        <div id="last-name-input-row" class="ws-form-input-row">
+                            <input id="last-name" class="form-control" name="last_name" type="text" data-bind="textInput: $data.lastName" />
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="ifnot: hasEmailAddress, validationElement: $data.emailAddress">
+                        <label for="free-trial-modal-email" id="email-address-modal">Email Address:</label>
+                        <div id="email-address-input-row" class="ws-form-input-row">
+                            <input type="text" data-bind="textInput: emailAddress" class="form-control margin-20-bottom" id="free-trial-modal-email" placeholder="Your Email">
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationElement: $data.password">
+                        <label for="password" id="password-label">Create Password</label>
+                        <span class="form-helper"><i data-bind="css: passwordObfuscateClass, click: togglePasswordObfuscated"></i></span>
+                        <div id="password-input-row" class="ws-form-input-row">
+                            <input id="password" class="form-control" name="password1" data-bind="textInput: $data.password, attr: { type: passwordFieldType }" />
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationElement: $data.companyName">
+                        <label for="company-name" id="company-name-label" data-bind="text: $data.companyNameLabel"></label>
+                        <div id="company-name-input-row" class="ws-form-input-row">
+                            <input id="company-name" class="form-control" name="company_name" type="text" data-bind="textInput: $data.companyName" />
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationElement: $data.website">
+                        <label for="trial-modal-website" id="website-label" data-bind="text: $data.websiteLabel"></label>
+                        <div id="website-input-row" class="ws-form-input-row">
+                            <input id="trial-modal-website" class="form-control" name="website" type="text" data-bind="textInput: $data.website" />
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationElement: $data.phoneNumber">
+                        <label for="phone-number" id="phone-number-label">Work Phone</label>
+                        <div id="phone-number-input-row" class="ws-form-input-row">
+                            <input id="phone-number" class="form-control" name="phone_number" type="tel" data-bind="textInput: $data.phoneNumber" />
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationElement: $data.businessType">
+                        <label for="business-type-input-row" id="business-type-label">Are you an Advertiser or Marketing Agency?</label>
+                        <div id="business-type-input-row" class="ws-form-input-row">
+                            <input id="business-type-advertiser" type="radio" name="business-type" value="advertiser" data-bind="checked: $data.businessType" aria-describedby="business-type-help-text" />
+                            <label for="business-type-advertiser" class="margin-10-left" style="font-weight: normal;">Advertiser</label>
+                            <br>
+                            <input id="business-type-agency" type="radio" name="business-type" value="agency" data-bind="checked: $data.businessType" aria-describedby="business-type-help-text" />
+                            <label for="business-type-agency" class="margin-10-left" style="font-weight: normal;">Marketing Agency</label>
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationElement: $data.monthlyBudget">
+                        <label for="monthly-budget" id="monthly-budget-label">What is your Monthly Online Advertising Budget?</label>
+                        <div id="monthly-budget-input-row" class="ws-form-input-row">
+                            <select id="monthly-budget" name="monthly_budget" class="form-control" data-bind='value: $data.monthlyBudget' aria-describedby="monthly-budget-help-text">
+                                <option>Make a selection (USD)</option>
+                                <option value="$0">$0</option>
+                                <option value="$1 - 749">$1 - $749</option>
+                                <option value="$750 - 2,499">$750 - $2,499</option>
+                                <option value="$2,500 - 4,999">$2,500 - $4,999</option>
+                                <option value="$5,000 - 9,999">$5,000 - $9,999</option>
+                                <option value="$10,000 - 19,999">$10,000 - $19,999</option>
+                                <option value="$20,000 - 49,999">$20,000 - $49,999</option>
+                                <option value="$50,000 - 99,999">$50,000 - $99,999</option>
+                                <option value="$100,000+">$100,000+</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationElement: $data.hasAcceptedAgreement">
+                        <div id="agreement-input-row" class="ws-form-input-row ws-input-agreement-row">
+                            <input id="agreement" type="checkbox" name="agreement" data-bind="checked: $data.hasAcceptedAgreement" />
+                            <label for="agreement" id="agreement-label" style="font-weight: normal">
+                                I agree to the terms of the <a tabindex="-1" target="_blank" id="subscription-agreement-link"
+                                                               href="//www.wordstream.com/master-subscription-agreement">WordStream Master Subscription Agreement</a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="alert alert-danger hidden-load ws-message-box" id="error-message-box" role="alert"
+                         data-bind="html: $data.errorMessage, visible: $data.showErrorMessage"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" data-bind="with: fktFreeTrialViewModel">
+        <button id="no-thanks" type="submit"
+                class="btn btn-white submit-button btn-large"
+                data-bind="click: $parents[1].hideModal">No thanks
+        </button>
+        <button id="desktop-whats-next-trial-footer"
+                data-bind="click: createTrial, disable: disableSubmit, showButtonLoadingState: isSubmitting"
+                class="btn btn-warning submit-button btn-large" data-loading-text="Starting trial...">
+            Start my free trial
+        </button>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-download-template">
+    <div class="container">
+        <div class="row margin-35-top">
+            <div class="col-sm-4 extra-padded-column-right">
+                <div class="keyword-list-img"></div>
+            </div>
+            <div class="col-sm-8 extra-padded-column-left">
+                <div>
+                    <h2 class="bold">Say "hello" to your shiny new keywords!</h2>
+                </div>
+                <div class="margin-20-top">
+                    <div class="download-text">Your download will begin shortly, or you can <br>
+                        <span class="blue-text"
+                              data-bind="click: downloadKeywords">click here to manually start it</span>.
+                    </div>
+                </div>
+                <div class="well well-blue well-download text-center margin-20-top mobile-no-display">
+                    <p>
+                        Keyword research can be time-consuming&mdash;and it's just one task on your plate.
+                    </p>
+                    <p>
+                        If you're spending too much time managing your online advertising, we can help! Built for small and
+                        mid-sized businesses, our software lets you tackle your Google, Bing, and Facebook Ads all in one
+                        easy-to-use place. Adjust bids, add keywords, track conversions, pull cross-platform reports,
+                        and more!
+                    </p>
+                    <button class="btn btn-warning btn-small-bold-text margin-35-top"
+                            data-bind="click: startFreeTrial, enable: hasEmail">
+                        TRY WORDSTREAM ADVISOR FOR FREE
+                    </button>
+                    <form id="free-trial-form-download" target="_blank" method="post"
+                          data-bind="attr: { action: freeTrialStep2 }">
+                        <input name="email_address" type="hidden" data-bind="attr: { value: emailAddress }">
+                    </form>
+                </div>
+                <div class="margin-70-top">
+                    <div>
+                        <h3 class="bold">Or Keep Exploring...</h3>
+                    </div>
+                    <div class="keep-exploring-desktop margin-25-top">
+                        <div class="keep-exploring-button" data-bind="click: goToGAPG">
+                            <div class="google-ads-grader-icon"></div>
+                            <div class="margin-20-top">Grade your Google Ads Account</div>
+                        </div>
+                        <div class="keep-exploring-button" data-bind="click: goToHackGoogleAds">
+                            <div class="hack-google-ads-icon"></div>
+                            <div class="margin-20-top">Learn How to Hack Your Google Ads</div>
+                        </div>
+                    </div>
+                    <div class="keep-exploring-mobile">
+                        <div class="keep-exploring-button" data-bind="click: goToGAPG">
+                            <div class="google-ads-grader-icon"></div>
+                            <div class="keep-exploring-text">Grade your Google Ads Account</div>
+                        </div>
+                        <div class="keep-exploring-button" data-bind="click: goToHackGoogleAds">
+                            <div class="hack-google-ads-icon"></div>
+                            <div class="keep-exploring-text">Learn How to Hack Your Google Ads</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <iframe id="frame" style="display: none;"></iframe>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-common-footer">
+    <div class="grid-hr-wrapper">
+        <hr class="grid-hr">
+    </div>
+    <div data-bind="template: {name: footerContentTemplate}"></div>
+</script>
+
+<script type="text/html" id="desktop-common-footer-content">
+    <div class="common-footer-wrapper" data-bind="css: backgroundColor">
+        <div class="container common-footer-container">
+            <div class="full-height bottom-20">
+                <div class="common-footer-div cf-left">
+                    <img data-bind="attr: {src: wordstream.constants.assetUrl + '/img/wordstreamlogo.png'}" style="height: 20px; margin-bottom: 10px;">
+                    <div style="color: #868994">
+                        Copyright &copy; 2020 WordStream, Inc.
+                    </div>
+                </div>
+            </div>
+            <div class="common-footer-div cf-middle full-height footer-text bottom-10">
+                <div class="common-footer-text">
+                <span data-bind="foreach: footerLinks">
+                    <a class="common-footer-item" data-bind="text: name, attr: {href: href}" target="_blank"></a>
+                </span>
+                </div>
+            </div>
+            <div class="common-footer-div cf-right full-height footer-text bottom-10">
+                <div class="common-footer-legal-text">
+                <span data-bind="foreach: footerLegalLinks">
+                    <a class="common-footer-item" data-bind="text: name, attr: {href: href}" target="_blank"></a>
+                </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="mobile-common-footer-content">
+    <div class="container mobile-common-footer" data-bind="css: backgroundColor">
+        <div class="row">
+            <div class="col-xs-12" style="margin: 40px 0 20px 0; text-align: center;">
+                <img data-bind="attr: {src: wordstream.constants.assetUrl + '/img/wordstreamlogo.png'}" style="height: 20px;">
+            </div>
+        </div>
+        <div class="row flex-justify-space-around text-center margin-10-bottom"
+             data-bind="foreach: {data: footerLinks.slice(0,3)}">
+            <div>
+                <a class="common-footer-item" data-bind="text: name, attr: {href: href}" target="_blank"></a>
+            </div>
+        </div>
+        <div class="row margin-20-bottom text-center" data-bind="foreach: {data: footerLinks.slice(3,4)}">
+            <div class="col-xs-12">
+                <a class="common-footer-item" data-bind="text: name, attr: {href: href}" target="_blank"></a>
+            </div>
+        </div>
+        <div class="row flex-justify-space-around text-center" data-bind="foreach: footerLegalLinks">
+            <div>
+                <a class="common-footer-item" data-bind="text: name, attr: {href: href}" target="_blank"
+                   style="color: #868994"></a>
+            </div>
+        </div>
+        <div class="row margin-20-top text-center">
+            <div class="col-xs-12" style="color: #868994">
+                Copyright &copy; 2020 WordStream, Inc.
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-sticky-footer">
+    <div data-bind="template: { name: 'fkt-mobile-sticky-footer' }" class="mobile-only-display"></div>
+</script>
+
+<script type="text/html" id="fkt-mobile-sticky-footer">
+    <div class="fixed-footer-container">
+        <div class="container big-fixed-mobile-footer">
+            <div class="fixed-footer-div footer-text">
+                <button class="btn btn-warning btn-large-mobile"
+                        id="email-my-keywords-footer"
+                        data-bind="click: openEmailModal, enable: showKeywords">EMAIL ALL MY KEYWORDS
+                </button>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-validation-error">
+    <span class="field-error" data-bind="validationMessage: field, validationVisible: field"></span>
+</script>
+
+<script type="text/html" id="fkt-api-no-results-template">
+    <div class="container-fluid mobile-full-width">
+        <div class="error-content-container">
+            <div class="error-row">
+                <div class="error-row-item">
+                    <img class="error-img" data-bind="attr: {src: wordstream.constants.assetUrl + '/img/fkt-general-error-graphic.svg'}">
+                </div>
+                <div class="error-row-item">
+                    <div data-bind="html: errorPageHeaderText().noResults"></div>
+                    <br>
+                    <div data-bind="html: errorPageSubHeaderText().noResults"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-api-down-template">
+    <div class="container-fluid mobile-full-width">
+        <div class="error-content-container">
+            <div class="error-row">
+                <div class="error-row-item">
+                    <img class="error-img" data-bind="attr: {src: wordstream.constants.assetUrl + '/img/fkt-connectivity-error-graphic.svg'}">
+                </div>
+                <div class="error-row-item">
+                    <div data-bind="html: errorPageHeaderText().noConnectivity"></div>
+                    <br>
+                    <div data-bind="html: errorPageSubHeaderText().noConnectivity"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-ip-limit-template">
+    <div class="container-fluid mobile-full-width">
+        <div class="error-content-container">
+            <div class="error-row">
+                <div class="error-row-item">
+                    <img class="error-img" data-bind="attr: {src: wordstream.constants.assetUrl + '/img/fkt-limit-error-graphic.svg'}">
+                </div>
+                <div class="error-row-item">
+                    <div class="error-column">
+                        <div data-bind="html: errorPageHeaderText().ipLimit"></div>
+                        <br>
+                        <div data-bind="html: errorPageSubHeaderText().ipLimit"></div>
+                    </div>
+                    <div class="well well-blue text-center mobile-no-display">
+                        <div class="error-column-item">
+                            <div class="well-bold-text">
+                                There's a lot more where that came from. Get powerful keyword research tools, access
+                                personalized performance recommendations for Google, Bing, and Facebook Ads, and more.
+                            </div>
+                        </div>
+                        <div class="error-column-item">
+                            <div class="btn btn-warning" id="start-trial-button-ip-limit"
+                                 data-bind="click: startFreeTrial">TRY WORDSTREAM ADVISOR FOR FREE
+                            </div>
+                        </div>
+                    </div>
+                    <div class="error-column-item">
+                        <div class="well-blue-text desktop-text-center">
+                            <a href="https://www.wordstream.com/wordstream-graders">Try Another Free Tool</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-api-limit-template">
+    <div class="container-fluid mobile-full-width">
+        <div class="error-content-container">
+            <div class="error-row">
+                <div class="error-row-item">
+                    <img class="error-img" data-bind="attr: {src: wordstream.constants.assetUrl + '/img/fkt-limit-error-graphic.svg'}">
+                </div>
+                <div class="error-row-item">
+                    <div data-bind="html: errorPageHeaderText().apiLimit"></div>
+                    <br>
+                    <div data-bind="html: errorPageSubHeaderText().apiLimit"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/html" id="fkt-null-template">
+    <div class="container-fluid"></div>
+</script>
+
+    <!-- ko with: fktAppViewModel -->
+    <div class="container-fluid">
+        <div class="row">
+            <div data-bind="template: { name: fktAppFooter}"></div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko with: fktAppViewModel -->
+        <!-- ko if: renderGridFooter -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div data-bind="template: { name: fktGridFooter}"></div>
+                </div>
+            </div>
+        <!-- /ko -->
+    <!-- /ko -->
+        </div>
+        <div id="main-right" data-bind="css: {open: $root.slidePanelViewModel.isOpen}">
+         </div>
+
+<div data-bind="if: wordstream.viewModelLocator.badOauthViewModel">
+    <div data-bind="with: wordstream.viewModelLocator.badOauthViewModel">
+        <wordstream-modal id="bad-oauth-modal" params="viewModel: modalViewModel">
+
+            <div class="wstm-modal modal fade" data-backdrop="static" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <div data-bind="if: allowClose">
+                                <button type="button" id="publish_changes_modal_close_top" class="close" aria-label="Close" data-bind="click: closeModal">
+                                    <i class="modal-close-icon"></i>
+                                </button>
+                            </div>
+                            <p id="bad_oauth_modal_title" class="modal-title">Reconnect Your Accounts</p>
+                        </div>
+                        <div class="modal-body">
+                            <div class="bad-oauth-modal-body">
+                                <p id="publish_changes_modal_prompt">WordStream can't connect to the accounts listed below. Please reconnect to enable us to download your latest performance data and provide recommendations.</p>
+
+                                <div id="bad-oauth-vendor-list" class="bad-oauth-vendor-list">
+                                    <div data-bind="if: adwordsOauthBad">
+                                        <div id="adwords-reconnect" class="vendor-reconnect well">
+                                            <span class="google-vendor-icon-circle icon-32"></span>
+                                            <span class="vendor-label">Google</span>
+                                            <button type="button" id="reconnect-adwords-button" class="btn btn-primary pull-right" data-bind="click: relinkAdwordsAccount">Fix Connection</button>
+                                        </div>
+                                    </div>
+                                    <div data-bind="if: bingOauthBad">
+                                        <div id="bing-reconnect" class="vendor-reconnect well">
+                                            <span class="bing-vendor-icon-circle icon-32"></span>
+                                            <span class="vendor-label">Bing</span>
+                                            <button type="button" id="reconnect-bing-button" class="btn btn-primary pull-right" data-bind="click: relinkBingAccount">Fix Connection</button>
+                                        </div>
+                                    </div>
+                                    <div data-bind="if: facebookOauthBad">
+                                        <div id="facebook-reconnect" class="vendor-reconnect well">
+                                            <span class="facebook-vendor-icon-circle icon-32"></span>
+                                            <span class="vendor-label">Facebook</span>
+                                            <button type="button" id="reconnect-facebook-button" class="btn btn-primary pull-right" data-bind="click: relinkFacebookAccount">Fix Connection</button>
+                                        </div>
+                                    </div>
+                                    <div data-bind="if: merchantOauthBad">
+                                        <div id="merchant-reconnect" class="vendor-reconnect well">
+                                            <span class="merchant-center-vendor-icon-circle icon-32"></span>
+                                            <span class="vendor-label">Merchant Center</span>
+                                            <button type="button" id="reconnect-merchant-center-button" class="btn btn-primary pull-right" data-bind="click: relinkMerchantAccount">Fix Connection</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <h4 id="account_disconnected_explanation_title">Why is my ad account disconnected?</h4>
+                                <p id="account_disconnected_explanation">Your ad account may become disconnected if the password to the ad account was changed, the user that connected the account no longer has access to it, or you or the ad account owner removed access.</p>
+
+                                <h4 id="fix_connection_explanation_title">How do I fix my account?</h4>
+                                <p id="fix_connection_explanation">Click the "Fix Connection" button and enter your ad account credentials. After reconnecting your account we recommend running a Get to pull your latest account information into WordStream Advisor.</p>
+
+                                <a id="modify-account-settings-link" href="/advisor/settings">Review/remove connected accounts</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </wordstream-modal>
+    </div>
+</div>
+
+            <script id="error-validation-template" type="text/html">
+                <span class="form-count-control-feedback" data-bind="characterCount: field"></span>
+                <div class="error-display" data-bind="validationVisible: field">
+                    <a href="javascript:void(0)"
+                        class="error-validation-template-link glyphicon glyphicon-remove form-control-feedback cursor-default no-link-decoration"
+                        data-bind="popover: field">
+                    </a>
+                </div>
+            </script>
+
+            <script id="empty-template" type="text/html">
+            </script>
+
+            <wordstream-modal id="wordstream-system-message-modal" params="viewModel: wordstream.viewModelLocator.systemMessageViewModel">
+                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-body" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-body" data-bind="html: $data.message">
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click: $data.okClickHandler">OK</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </wordstream-modal>
+
+            <wordstream-modal id="wordstream-system-error-modal" params="viewModel: wordstream.viewModelLocator.systemErrorViewModel">
+                <div class="modal fade" id="system-error-modal" tabindex="-1" role="dialog" aria-labelledby="modal-body" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-body" id="system-error-modal-body">
+                            <button type="button" id="system-error-close-button" class="close" data-dismiss="modal" aria-hidden="true" data-bind="click: $data.closeModal">
+                                ×
+                            </button>
+                            <div>Oops, something went wrong</div>
+                            <div id="system-error-modal-message" class="alert-error" data-bind="html: $data.message">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </wordstream-modal>
+
+            <div data-bind="if: wordstream.viewModelLocator.detectAdBlockerViewModel">
+
+                <wordstream-modal id="adblocker-active-error-modal" params="viewModel: wordstream.viewModelLocator.detectAdBlockerViewModel">
+                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-body" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-bind="click:dismissWarning"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">Ad Blocking Tool Detected</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="adblocker-warning-detected-adblocker">
+                                        Uh oh... We've detected an ad blocking program running which will prevent you from
+                                        having full use of WordStream Advisor.
+                                        These programs block requests containing terms such as "ads" and prevent
+                                        actions such as downloading and posting changes and reviewing ads.
+                                    </div>
+
+                                    <div id="adblocker-warning-how-to-disable-info" class="pad-20-top">
+                                        To have full use of the software <strong>we recommend disabling your ad block on wordstream.com</strong>.
+                                        <a id="adblocker-warning-how-to-disable-info-link" class="error-link-text arial" target="_blank" href="http://www.wordstream.com/adblockers-and-wordstream">
+                                        How do I do this?</a>.
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" data-bind="click:dismissWarning">OK</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </wordstream-modal>
+
+            </div>
+
+
+                <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-W7WSGJ3" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+
+            <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+        <!-- DEPRECATED -->
+
+    <script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/URI.9f6928f7a8954f888e95.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/cookies.07e06ecd703a45110481.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/vendor~knockout.13d831011b261782937e.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/vendor~bootstrap.84b526b7932ad5b05b7a.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/d3.da01cd713c0dbd6b8ead.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/moment-2.10.6.f9cfbbcc0e6710c68b05.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/plugins.daf4a44ae507ff56e293.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/pusher.min.d051420904983c67fe26.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/toastr.e5abe06b8b86fbcbdb85.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/vendor~jquery.34bc9c5c95e49e5a53e0.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/spectrum.03842656ce0a885dd9e3.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/mustache.min.faff00b0616c22cefd85.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/d3.tip.e40df957a8cb05d4a6b6.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/json2.d4c1a0d066c26c7f4c4d.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/0.8a88924a70aa03cc3419.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/toastr-override.css.aaf7e933a14e294532d0.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/toastr.css.6b7258c4b4756e78feef.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/nv.d3.df1611ff09889d6cbf22.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/moment-timezone-with-data-2012-2022.min.967801548d7334caf0cc.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/1.da16b5b503cfd58b1a96.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/datepicker.css.e7e82a65f6d739b79f1f.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/font-awesome.4.1.css.0e362c4ff1cf4c304be0.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/charts/funnel.a5625e3965f2f77b9544.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/components.425aaf8c03b31a280b41.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/monkey-patch-bts-tooltip.7d1966278a938971e6e7.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/monkey-patch-bts-popover.b99694878ce6e745e164.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/fine-uploader.315744c66d216582fff0.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/select2.efbbb028c8fe83d21aaf.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/cropper.d749de8c9b5469e84039.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/typeahead.263709c9897fbe493295.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/custom-daterangepicker-2.1.12.1070ac96ad570f77f355.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/dropzone.min.bbd228d06cfdd7ed979f.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/slip.c6c4006d3913db0d56d2.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/ResizeSensor.969bcb3b804a727cb236.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/bootstrap.3.2.css.30089e555a7d9bd9e6c0.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/2.bbf1a70c09e78e654066.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/data_grid/item_renderers.a8f05b2b2eb2b37f48f2.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/facebook/adset.6e24bcbd3bfbcebbe469.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/facebook/ad.8c9a702c872b3a2969d9.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/notification/notifiers.0898aa001010ec8e1f67.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/data_grid/item_editors.c6840577d0b3a3c85833.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/charts.2fe64337c41b367fa2cc.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/asset_library.49740deeebdeb90f9160.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/facebook/campaign.c01002260748b494028d.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/data_list/item_renderers.d32e0811f51987281658.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/logo_selector.0782550279ffe749279a.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/data_grid.d6e9c30a4293d4f513c1.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/targeting_editing.29055b5b0d471a3dfcc0.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/facebook/lead_gen_form.c141768bafc7c0c2bce2.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/smart_display_ad_preview.b102090c120c3d4b8c54.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/categorized_multiselect.7748d69e5eda0729e99f.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/vendor_tree.85143324caf717a1aa38.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/charts/charters.ea60fb65aaa5a547ac2c.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/vendor_picker.fd397d90fcc5b67606f0.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/bing_auto_import.0813bf2d3ffda213bdd4.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/charts/axes.6d913e416654c79ab8e6.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/data_grid/header_renderers.8772d3585ea1866c9cad.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/facebook.2420873ee8cce4d38298.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/ad_preview.b131bf96f05d9693fd92.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/image_cropper.ad5a6061caa1e91729a2.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/file_uploader.3b17ddd7453e7aa7dd24.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/multi_filter_bar.327587c4c1ce3294aaac.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/charts/tooltips.a652ab4d0e6e8459e5db.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/asset_library/tab/video.1db8beabd21aa274383e.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/facebook-conversion-events.7791f5965955a97b6118.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/image_library_preview.971626f4733eceec6230.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/demographic_insights_audience_finder.089fc352af92bed01e1f.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/dropdown/view_models.cf5da0ff8d30973e0d82.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/business_pages_selection_setup.d37b34d52a33e0079659.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/popover.fdb10643b3da6e162a46.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/accordion.d2c5fe0eeda888c3d486.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/wizard.4d2b28caf67fae015d30.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/data_list.e28baf01402a2068dca9.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/estimated_daily_reach.54b4c3c91dde8e02a248.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/form_item.a8c061c7794fb50a0ae9.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/text_style.ce241fcb56656ab28853.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/dropdown/models.d96932027a809809f407.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/tab_navigation.18ec1a3bed9884af8b70.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/shutterstock.461900da524a0f8ed103.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/view_group.c153533a7b2ae84c175f.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/notes.d76f81728b7b7aaab46c.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/content_exclusions.0be54e922207944e5f44.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/notification.894c063ce4e54e35d00a.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/facebook/instagram.28becdc875700d86bae5.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/ad_creation.2a3e1e3822a83750d057.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/default_locations_selection_setup.a8fc45c338d44abbdccf.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/business_url_setting.565d50ad94c0b035cfde.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/merchant_center.eebeb851dc0e613183f8.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/asset_library/modal.ef20b30f7e7fda730a51.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/confirmation_modal.663a4cb7905b2dc0d83e.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/dropdown.19a3484f6ccf009307b1.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/smart_video_ad_preview.eaf01d26aaf9994d03fe.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/account_survey.19a1d956b8b2c4828be6.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/editor.bf8638c043ea8158c2d4.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/searchable_data_lists.a29b58eb79da0e1a8434.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/facebook/business_page.7c1fc927a095ea5d6fce.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/prefixed_input.49f6c4ed4073f6a42cfc.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/products.f2d27c1627dc7d005880.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/slider.85e95321373e38e77626.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/color_picker.546feb4e20f340b7e32f.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/scrollable-image-viewer.41a7256077a504416585.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/radial_progress.a8feff5ff80c7c522cc9.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/bootstrap_alert.8b4ac744a801d2869072.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/breadcrumb.989eeb28a95aada5541b.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/media_list.6b01387cfd906605c718.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/agency_logo.bed86aab7f1070dac969.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/spend_target_bar.f4c94cd59bf7d468476b.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/modal.8a72a1b1ce7c5dc7c0dd.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/corner_modal.fe243e1ef6a1923be5e9.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/maintenance_message.c93850a67b8be74e0b58.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/loading.15b0396e81e23ba4db5b.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/navigation.76918edce02f38c13bfc.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/data_grid/components.a9f1feb7264355d7d3fd.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/pixel_tag.457b52e795ba2e8a851b.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/selection_block.21dcce238c77d94e4c98.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/toggle_switch.adf2934bb4bf690f2c57.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/google_psp_badge.e9058a22871bf958c178.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/3.0c728808a0e0251b554f.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/bootstrap-slider.css.d2568e3819f92efd35ec.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/circle.css.62ba6a24e7b6d16a18b6.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/cropper.css.295833f3a5a21cddef62.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/daterangepicker-2.1.12.css.be31287ab4188c307e65.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/basic.min.css.eaab5b503a8e1e33ac21.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/dropzone.min.css.c9110c21f8eb0530f76b.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/skin.css.1abb97825a5121e42bcf.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/jquery.floatingscroll-custom.css.e7d80b40c85f7eac99c7.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/quill.snow.css.e824c65e0b8b14704e70.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/select2-bootstrap-1.4.6.css.c51fd71d363276528d5c.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/select2.css.46d19877f07a8f829ca7.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/spectrum.css.83702f24665c87b6d76b.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/typeahead.css.b3d4e17cf056fca781a8.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/quill.b9e04bd8961b4f4a2dd3.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/google_places_search.4a0ac0cdd0b79243a645.js"></script><script src="https://s3.amazonaws.com/wordstream-static-asset-server/Production/js/free-keyword-tool-app.8023dd5f9b1b434d524c.js"></script></body>
+</html>

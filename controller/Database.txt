@@ -1,0 +1,85 @@
+CREATE TABLE tb_key_rech_reslt
+(
+	_key_id int(11) AUTO_INCREMENT,
+    _keyword varchar(150),
+    _global_volume float,
+    _US_volume float,
+    _CPC float,
+    PRIMARY KEY (_key_id)
+);
+
+
+--
+
+CREATE TABLE tb_global_volume
+(
+    _vol_id int(11) AUTO_INCREMENT,
+    _keyword varchar(150),
+    _country varchar(250),
+    _volume float,
+    PRIMARY KEY (_vol_id)
+);
+
+ALTER TABLE tb_global_volume 
+add (volume_country varchar(50))
+
+
+alter table `tb_key_rech_reslt` 
+add COLUMN _global_kd int(11) 
+
+
+CREATE TABLE tb_key_variations
+(
+    _key_id int(11) AUTO_INCREMENT,
+    _search_key varchar(250),
+    _key_month_vol float,
+    _key_total_vol float,
+    _key_reletd_search varchar(250),
+    _reletd_search_vol float,
+    _reletd_search_kd  float,
+    PRIMARY KEY (_key_id)
+);
+
+
+CREATE TABLE tb_key_questions
+(
+    _key_id int(11) AUTO_INCREMENT,
+    _search_key varchar(250),
+    _key_month_vol float,
+    _key_total_vol float,
+    _key_reletd_search varchar(250),
+    _reletd_search_vol float,
+    _reletd_search_kd  float,
+    PRIMARY KEY (_key_id)
+);
+
+
+CREATE TABLE tb_key_related
+(
+    _key_id int(11) AUTO_INCREMENT,
+    _search_key varchar(250),
+    _key_month_vol float,
+    _key_total_vol float,
+    _key_reletd_search varchar(250),
+    _reletd_search_vol float,
+    _reletd_search_kd  float,
+    PRIMARY KEY (_key_id)
+);
+
+
+CREATE TABLE tb_keyword_files
+(
+    _id int(11) AUTO_INCREMENT,
+    _keyword varchar(255),
+    _url varchar(255),
+    PRIMARY KEY (_id)
+);
+
+
+create table tb_user_info
+(
+    id int AUTO_INCREMENT,
+    u_name varchar(150) not null,
+    u_email varchar(150) not null,
+    u_pass varchar(150) not null,
+    PRIMARY key (id))

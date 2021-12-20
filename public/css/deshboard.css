@@ -1,0 +1,38 @@
+.bodys{
+        background-image: url("../icon/USA.png");
+        /* set background image */
+        height: 100%;
+        width: 100%;
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        margin: auto;
+}
+
+.header-sm-tit{
+    color: cadetblue;
+    font-size: 12px;
+}
+
+.icon{
+    margin: 0px;
+    padding: 0px; 
+    height: 18px;
+    width: 18px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+}
+.divider{
+    margin: 0px 10px 0px 10px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid;
+    border-bottom-color: rgb(189, 189, 189);
+    border-radius: 50%;
+}
+
+.head-reslt-vol{
+    font-family: 'Lucida Sans', Geneva, Verdana, sans-serif; font-weight: bold;
+}
