@@ -22,7 +22,7 @@ $routes = [
 ];
 
  
-$basedPage='deshboard.php';
+$basedPage='search.php';
 
 // echo $url;
 

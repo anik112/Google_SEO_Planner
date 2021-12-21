@@ -6,11 +6,11 @@ import time
 file_name = 'ss.html'
 
 # get perametter from console
-#keywordName=sys.argv[1]
-keywordName='facebook'
+keywordName=sys.argv[1]
+#keywordName='dog'
 options = webdriver.ChromeOptions() 
 #remove chorme popup window
-options.add_argument("--headless")
+#options.add_argument("--headless")
 #start web browser
 browser=webdriver.Chrome(options=options)
 # get source code
