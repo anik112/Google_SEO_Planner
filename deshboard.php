@@ -55,8 +55,8 @@ if(isset($_POST['submit'])){
 
     $keyword=$_POST['searchContent'];
 
-    $command = escapeshellcmd("python test.py $keyword");
-    $output = shell_exec($command);
+    //$command = escapeshellcmd("python test.py $keyword");
+    //$output = shell_exec($command);
     
     //$handle = popen("test.py $keyword", 'r');
     //$output = fread($handle, 1024);
