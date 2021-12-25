@@ -17,8 +17,8 @@ if(isset($_POST['submit'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deshboard</title>
-    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/css/deshboard.css">
+    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/fonts/icomoon/style.css">
     <link rel="stylesheet" href="../public/css/footer-style.css">
 </head>
@@ -42,7 +42,7 @@ if(isset($_POST['submit'])){
 </div>
 
 <div class='col-lg-3 text-center py-3'>
-
+<!--
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           EN
@@ -50,8 +50,8 @@ if(isset($_POST['submit'])){
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">BN</a>
           <a class="dropdown-item" href="#">CH</a>
-        </div>
-    </li>
+        </div> 
+    </li> --->
 
     <a href="login.php" class='btn btn-outline-info'>Login</a>
     <a href="contact.php" class='btn btn-outline-info'>Contact</a>

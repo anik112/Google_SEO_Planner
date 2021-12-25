@@ -67,6 +67,7 @@ function find_CPC_COM_PLA_ADS($key, $domFile){
 
     $_s=0;
     foreach($domFile->find('.kwo-metrics-data-layout') as $data){
+        //echo $data1; //->innertext;
         if(!empty($data)){
             //echo $data->innertext;
             switch($_s){
@@ -86,9 +87,9 @@ function find_CPC_COM_PLA_ADS($key, $domFile){
             $_s++;
         }
         //echo $cpc.' - '.$com.'</br>';
-
-        return [$cpc,$com,$pla,$ads];
+        
     }
+    return [$cpc,$com,$pla,$ads];
 }
 
 
@@ -230,7 +231,8 @@ function find_keywordVariantKey_serpAnalysis($key, $domFile){
     }
 
     $i=0;
-    foreach($domFile->find('table.kwo-serp-table__table tr.___SRow_1m9ev-ko_ td.___SText_158ur-ko_ span.___SText_17rlk-ko_') as $data){
+    // table.kwo-serp-table__table tr.___SRow_1m9ev-ko_ td.___SText_158ur-ko_ span.___SText_17rlk-ko_
+    foreach($domFile->find('table tr.___SRow_1m9ev-ko_ td.___SText_158ur-ko_ span.___SText_17rlk-ko_') as $data){
         //echo $data.'</br>';
         if(!empty($data)){
             $serpAnalysis[$i]=$data->innertext;

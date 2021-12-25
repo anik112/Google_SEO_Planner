@@ -15,6 +15,10 @@ $globalSearchVolume=$volume[1];
 $cpc=findCPC($key, $htmlDom);
 $globalKD=findGlobalKD($key, $htmlDom);
 
+/*foreach($htmlDom->find('table.___STable_1m9ev-ko_ tr') as $data){
+    echo $data;
+}*/
+
 $lists=find_CPC_COM_PLA_ADS($key, $htmlDom);
 $com=$lists[1];
 $pla=$lists[2];
@@ -35,6 +39,12 @@ $quesVolTotal=$lists[1];
 $relKeyVolTotal=$lists[2];
 
 $lists=find_keywordVariantKey_serpAnalysis($key, $htmlDom);
+
+//table.kwo-serp-table__table tr.___SRow_1m9ev-ko_ td.___SText_158ur-ko_ span.___SText_17rlk-ko_
+
+foreach($htmlDom->find('.kwo-serp-table__url tr.___SRow_1m9ev-ko_ td.___SText_158ur-ko_') as $data){
+    echo $data.'</br>';
+}
 
 $keywordVariantKey=$lists[0];
 $serpAnalysis=$lists[1];
@@ -89,7 +99,7 @@ if(isset($_POST['submit'])){
             <h3><Strong'>Keyword Overview: </Strong><i style='font-style: normal; color: #757575'><?php echo $search_key_word;?></i></h3>
             <div>
                 <i calss='top-head-src-country' style='padding-right: 5px; font-style: normal; font-size: 14px; border-right: solid; border-right-color: #acacac;'>
-                    <img class='icon' src="../icon/USA.png" alt=""><b> US</b>
+                    <img class='icon' src="../icon/USA.png" alt=""><a href="#"><b> US</b></a>
                 </i>
                 <i calss='top-head-src-device' style='padding-right: 5px; padding-left: 5px; font-style: normal; font-size: 14px; border-right: solid; border-right-color: #acacac;'>
                     <img class='icon' src="../icon/computer.png" alt=""><b> Desktop</b>
@@ -112,21 +122,21 @@ if(isset($_POST['submit'])){
                 <div class='row'>
                     <!-- Show Search volume and global KD -->
                     <div class='col-sm-4'>
-                        <div class='card'>
-                            <div class='card-body'>
+                        <div class='card bg-primary'>
+                            <div class='card-body text-light'>
                                 <h6>Volume</h6>
-                                <h3 class='head-reslt-vol' ><?PHP echo $usSearchVolume; echo ' M';?><img class='icon' style="height: 24px; width: 24px;" src="../icon/USA.png" alt="" srcset=""></h3>
+                                <h3 class='head-reslt-vol' ><?PHP echo $usSearchVolume; echo ' M';?><img class='icon' style="height: 40px; width: 40px; margin-left:10px;" src="../icon/USA.png" alt="" srcset=""></h3>
                             </div>
                             <div class='divider'></div>
-                            <div class='card-body'>
+                            <div class='card-body text-light'>
                                 <h6>Keyword Difficulty</h6>
                                 <h3 class='head-reslt-vol'><?php echo $globalKD; ?> % </h3>
                                 <div class="progress">
-                                <div class="progress-bar bg-secondary" style="width:70%"><?php echo $globalKD; ?> %</div>
+                                <div class="progress-bar bg-warning" style="width:70%"><?php echo $globalKD; ?> %</div>
                                 </div>
                             </div>
-                            <div class='card-body mt-1'>
-                                <p class='text-center' style="font-family: 'Lucida Sans', Geneva, Verdana, sans-serif; font-weight: bold; color: rgb(73, 73, 73); font-size: 12px; margin:0px;">
+                            <div class='card-body mt-1 text-light'>
+                                <p class='text-center text-light' style="font-family: 'Lucida Sans', Geneva, Verdana, sans-serif; font-weight: bold; color: rgb(73, 73, 73); font-size: 12px; margin:0px;">
                                 This keyword will demand 437 high authority referring domains and well optimized 
                                 content to start ranking for it.
                                 </p>
@@ -153,7 +163,7 @@ if(isset($_POST['submit'])){
                                             <td class='col-3 py-1'><p style="font-family: 'Lucida Sans', Geneva, Verdana, sans-serif; font-weight: bold; color: blue; margin: 0px 5px 0px 5px; font-size: 10px;"> <?php echo strtoupper($devidor[0]); ?></p></td>
                                             <td class='col-6 py-1'> 
                                                 <div class="progress">
-                                                    <img class='icon' src="../icon/US.png" alt="" srcset="">
+                                                    <!--<img class='icon' src="../icon/US.png" alt="" srcset="">-->
                                                     <div class="progress-bar progress-bar-striped bg-succcess" role="progressbar" style="width: <?php echo $devidor[2]; ?>;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">   </div>
                                                 </div>
                                             </td>
@@ -371,7 +381,6 @@ if(isset($_POST['submit'])){
     </div>
 
 </div>
-
 </div>
 
 

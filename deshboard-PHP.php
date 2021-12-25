@@ -37,7 +37,7 @@ foreach($htmlDom->find('.kwo-widget-total') as $data){
     $i++;
 }
 
-
+///  some work in here
 foreach($htmlDom->find('.kwo-metrics-data-layout') as $data){
     if(!empty($data)){
         $cpc=(float)str_replace('$','',$data->innertext);
