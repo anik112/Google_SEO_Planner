@@ -29,12 +29,14 @@ browser.find_element_by_name("password").send_keys("*ella2021#")
 
 browser.find_elements_by_class_name("sso-submit")[0].click()
 
-delay = 3 # seconds
-try:
-    myElem = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.ByClassName, 'kwo-serp-table__table')))
-    print ("Page is ready!")
-except TimeoutException:
-    print ("Loading took too much time!")
+time.sleep(2)
+
+#delay = 5 # seconds
+#try:
+#    myElem = WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.ByClassName, 'kwo-serp-table__table')))
+#    print ("Page is ready!")
+#except TimeoutException:
+#    print ("Loading took too much time!")
 
 html = browser.page_source
 
@@ -44,7 +46,6 @@ print(html)
 with open(file_name, "w", encoding="utf-8") as file_object:
 
     file_object.write(html)
-
     file_object.close()
 
 # close web browser
@@ -52,8 +53,6 @@ with open(file_name, "w", encoding="utf-8") as file_object:
 browser.close()
 
 sys.exit()
-
-
 
 #-------------------  Test codes
 
