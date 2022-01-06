@@ -64,13 +64,14 @@ $serpAnalysis=$lists[1];
 if(isset($_POST['submit'])){
 
     $keyword=$_POST['searchContent'];
-
+    echo $keyword;
     //$command = escapeshellcmd("python test.py $keyword");
-    //$output = shell_exec($command);
-    
+    $command = escapeshellcmd("python tst1.py $keyword");
+    $output = shell_exec($command);
+    echo 'Py call...';
     //$handle = popen("test.py $keyword", 'r');
     //$output = fread($handle, 1024);
-    //var_dump($output);
+    var_dump($output);
     //pclose($handle);
 
     $checkSubmit='YES';
