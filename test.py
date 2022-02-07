@@ -7,11 +7,11 @@ from selenium.common.exceptions import TimeoutException
 import time
 
 # saving file metter
-file_name = 'ss1.html'
+file_name = 'ss.html'
 
 # get perametter from console
-keywordName=sys.argv[1]
-#keywordName='youtube'
+#keywordName=sys.argv[1]
+keywordName='youtube'
 options = webdriver.ChromeOptions() 
 #remove chorme popup window
 #options.add_argument("--headless")
@@ -19,14 +19,17 @@ options = webdriver.ChromeOptions()
 browser=webdriver.Chrome(options=options)
 # get source code
 browser.get("https://www.semrush.com/analytics/keywordoverview/?q="+keywordName+"&db=us")
+
 browser.find_elements_by_class_name("sso-tabs__el")[1].click()
 
 #browser.find_element_by_name("email").send_keys("osshuvo@gmail.com")
 #browser.find_element_by_name("password").send_keys("*shuva1250*")
 
-browser.find_element_by_name("email").send_keys("adamella147@gmail.com")
-browser.find_element_by_name("password").send_keys("*ella2021#")
+#browser.find_element_by_name("email").send_keys("adamella147@gmail.com")
+#browser.find_element_by_name("password").send_keys("*ella2021#")
 
+browser.find_element_by_name("email").send_keys("@gmail.com")
+browser.find_element_by_name("password").send_keys("*ella2021#")
 
 #browser.find_element_by_name("email").send_keys("shuvaofficial5@gmail.com")
 #browser.find_element_by_name("password").send_keys("*ella2021#")
