@@ -27,7 +27,7 @@ if(isset($_POST['submit'])){
     
 <div class='row bg-dark'>
 <div class='col-lg-4 text-center px-5 py-3'>
-    <a href="deshboard.php"><h4><Strong style='color: white;'>SEO PLANER TOOLS</Strong><small class='header-sm-tit'> ( All SEO Solution )</small></h4></a>
+    <a href="deshboard.php"><h4><Strong style='color: white; font-size: 22px;'>SEO PLANNER TOOLS</Strong><small class='header-sm-tit'> ( All SEO Solution )</small></h4></a>
 </div>
 
 <div class='col-lg-5 text-right'>
