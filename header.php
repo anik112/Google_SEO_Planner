@@ -1,6 +1,5 @@
 <?php
 require 'simple_html_dom.php';
-
 require './controller/deshboardControl.php';
 
 $search_key_word='';
@@ -8,6 +7,10 @@ if(isset($_POST['submit'])){
     $search_key_word=$_POST['searchContent'];
     //echo $search_key_word;
 }
+
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +24,20 @@ if(isset($_POST['submit'])){
     <link rel="stylesheet" href="../public/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/fonts/icomoon/style.css">
     <link rel="stylesheet" href="../public/css/footer-style.css">
+    <link rel="icon" type="image/png" href="./icon/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./public/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./public/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./public/css/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="./public/css/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./public/css/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="./public/css/util.css">
+	<link rel="stylesheet" type="text/css" href="./public/css/main.css">
 </head>
 
 <body>

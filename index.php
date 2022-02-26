@@ -21,7 +21,7 @@ $routes = [
     'login' => 'login.php'
 ];
 
- 
+
 $basedPage='search.php';
 
 // echo $url;

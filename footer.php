@@ -1,4 +1,4 @@
-<footer class="footer-59391 mt-5">
+<footer class="footer-59391 mt-0 pt-5 bg-dark">
       
         <div class="container">
 
@@ -6,7 +6,7 @@
           <div class="row mb-5">
             <div class="col-md-4">
               <div class="site-logo">
-                <a href="#">SEO Planner</a>
+                <a href="#" style='color: white;'>SEO Planner</a>
               </div>
             </div>
             <div class="col-md-8 text-md-right">
@@ -41,7 +41,7 @@
           <div class="row">
             <div class="col ">
               <div class="copyright">
-                <p><small>Copyright 2021. All Rights Reserved [ SEO Planner ].</small></p>
+                <p style='color: white;'><small>Copyright 2021. All Rights Reserved [ SEO Planner ]</small></p>
               </div>
             </div>
           </div>

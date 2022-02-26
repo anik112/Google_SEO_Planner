@@ -64,6 +64,7 @@ $serpAnalysis=$lists[1];
 if(isset($_POST['submit'])){
 
     $keyword=$_POST['searchContent'];
+    $search_key_word = $keyword;
     //$command = escapeshellcmd("python test.py $keyword");
    // $command = escapeshellcmd("python tst1.py $keyword");
    // $output = shell_exec($command);
@@ -78,7 +79,15 @@ if(isset($_POST['submit'])){
     $checkSubmit='NO';
 }
 
+if (isset($_SESSION["u_email"])){
+    echo $_SESSION["u_email"];
+}
+
 ?>
+
+<!-- For backround colour --->
+<div class='container-login100'>
+
 
 <!-- main container , where we show all eelement -->
 <div class='container'>
@@ -86,19 +95,14 @@ if(isset($_POST['submit'])){
     
     </div>
 <div class='row'>
-    <div class='col-lg-1 mt-5 p-0'>
-        <div class='card m-0 p-0'>
-        <img class='' src="" alt=""  style='height: 400px; width:100%'>
-        </div>
-    </div>
 
-    <div class='col-lg-11 mt-5'>
+    <div class='col-lg-12 mt-5'>
        
     <div class='keyword-header'>
-            <h3><Strong'>Keyword Overview: </Strong><i style='font-style: normal; color: #757575'><?php echo $search_key_word;?></i></h3>
-            <div>
+            <h3><Strong style='color: rgb(223, 221, 221);;'>Keyword Overview: </Strong><i style='font-style: normal; color: white'><?php echo $search_key_word;?></i></h3>
+            <div class='mt-3'>
                 <i calss='top-head-src-country' style='padding-right: 5px; font-style: normal; font-size: 14px; border-right: solid; border-right-color: #acacac;'>
-                    <img class='icon' src="../icon/USA.png" alt=""><a href="#"><b> US</b></a>
+                    <img class='icon' src="../icon/USA.png" alt=""><a href="#"><b class='text-warning'> US</b></a>
                 </i>
                 <i calss='top-head-src-device' style='padding-right: 5px; padding-left: 5px; font-style: normal; font-size: 14px; border-right: solid; border-right-color: #acacac;'>
                     <img class='icon' src="../icon/computer.png" alt=""><b> Desktop</b>
@@ -109,9 +113,9 @@ if(isset($_POST['submit'])){
                 <i calss='top-head-src-amount-unit ' style='padding-left: 5px; font-style: normal; font-size: 14px;'><b> USD</b></i>
 
                 <div style='float: right;'>
-                <a href="https://www.semrush.com/academy/courses/competitive-analysis-and-keyword-research-course" style='margin-right: 10px; font-style: normal; font-size: 14px;'>Keyword Research course</a>
-                <a href="https://www.semrush.com/kb/257-keyword-overview" style='margin-right: 10px; font-style: normal; font-size: 14px;'>User manual</a>
-                <a href="#!" style='margin-right: 10px; font-style: normal; font-size: 14px;'>Send feedback</a>
+                <a href="https://www.semrush.com/academy/courses/competitive-analysis-and-keyword-research-course" style='margin-right: 10px; font-style: normal; font-size: 14px; color: white;'>Keyword Research course</a>
+                <a href="https://www.semrush.com/kb/257-keyword-overview" style='margin-right: 10px; font-style: normal; font-size: 14px; color: white;'>User manual</a>
+                <a href="#!" style='margin-right: 10px; font-style: normal; font-size: 14px; color: white;'>Send feedback</a>
                 </div>  
             </div>
         </div>
@@ -381,7 +385,7 @@ if(isset($_POST['submit'])){
 
 </div>
 </div>
-
+</div>
 
 <?php require 'footer.php' ?>
 
