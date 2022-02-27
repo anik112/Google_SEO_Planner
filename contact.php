@@ -1,11 +1,12 @@
 <?php require 'header.php'; ?>
 <!-- Contact -->
+<div class='container-search'>
 <section class="container mt-2">
 
     <!--Contact heading-->
-    <h2 class="h1 m-0">Contact us</h2>
+    <h2 class="h1 m-0 text-white">Contact us</h2>
     <!--Contact description-->
-    <p class="pb-4">Contact with us if you face any problem.</p>
+    <p class="pb-4 text-white">Contact with us if you face any problem.</p>
 
     <div class="row">
 
@@ -15,10 +16,10 @@
             <!--Form with header-->
             <div class="card border-primary rounded-0">
 
-                <div class="card-header p-0">
+                <div class="card-header">
                     <div class="bg-primary text-white text-center py-2">
                         <h3><i class="fa fa-envelope"></i> Get on touch:</h3>
-                        <p class="m-0">We'll write rarely, but only the best content.</p>
+                        <p class="m-0 text-white">We'll write rarely, but only the best content.</p>
                     </div>
                 </div>
                 <div class="card-body p-3">
@@ -77,18 +78,18 @@
             <div class="row text-center">
                 <div class="col-md-4">
                     <a class="bg-primary px-3 py-2 rounded text-white mb-2 d-inline-block"><i class="icon-location-arrow"></i></a>
-                    <p>Mirpur-10, Dhaka<br> Bagladesh</p>
+                    <p class='text-white'>Mirpur-10, Dhaka<br> Bagladesh</p>
                     
                 </div>
 
                 <div class="col-md-4">
                     <a class="bg-primary px-3 py-2 rounded text-white mb-2 d-inline-block"><i class="icon-phone-square"></i></a>
-                    <p>+8801826995639, <br> Sat to Th, 08:00 AM - 06:00 PM</p>
+                    <p class='text-white'>+8801826995639, <br> Sat to Th, 08:00 AM - 06:00 PM</p>
                 </div>
 
                 <div class="col-md-4">
                     <a class="bg-primary px-3 py-2 rounded text-white mb-2 d-inline-block"><i class="icon-envelope-o"></i></a>
-                    <p>paulanik.wb@gmail.com <br> sale@gmail.com</p>
+                    <p class='text-white'>paulanik.wb@gmail.com <br> sale@gmail.com</p>
                 </div>
             </div>
 
@@ -98,5 +99,6 @@
     </div>
 
 </section>
+</div>
 <!-- Contact -->
 <?php require 'footer.php' ?>

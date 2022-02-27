@@ -18,39 +18,33 @@ session_start(); // Start the session.
 $routes = [
     'deshboard' => 'deshboard.php',
     'contact' => 'contact.php',
-    'login' => 'login.php'
+    'login' => 'login.php',
+    'search' => 'search.php'
 ];
 
 
-$basedPage='search.php';
+$basedPage='search';
 
 // echo $url;
 
 if($url == null){
-    require $basedPage;
+    header("Location: search");
 }else{
-    if(isset($_SESSION['userId']) > 0){
+    //if(isset($_SESSION['userId']) > 0){
         // check request url have in this routes
         if(array_key_exists($url, $routes)){
             require $routes[$url];
         }else{
             echo 'file not found!';
         }
-    }else{
-        require "$basedPage"; // otherwise call based page
-    }
+    //}else{
+    //    require "$basedPage"; // otherwise call based page
+    //}
 }
 
 if(!empty($_GET['url'])){
     $requestURL=$_GET['url'];
 }
-
-
-
-
-
-
-
 
 
 //require 'upload.php';

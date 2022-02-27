@@ -1,26 +1,27 @@
 <?php
-require './controller/dbConnect.php';
+	require './controller/dbConnect.php';
 
-if(isset($_POST['login'])){
+	if(isset($_POST['login'])){
 
-$email = $_POST['email'];
-$password = $_POST['pass'];
+	$email = $_POST['email'];
+	$password = $_POST['pass'];
 
-$getData = $connect->prepare("SELECT COUNT(*) as cut FROM `tb_user_info` WHERE `u_email`='$email' and `u_pass` = '$password'");
-$getData->execute();
+	$getData = $connect->prepare("SELECT COUNT(*) as cut FROM `tb_user_info` WHERE `u_email`='$email' and `u_pass` = '$password'");
+	$getData->execute();
 
-$rusult=$getData->fetchAll(PDO::FETCH_OBJ);
+	$rusult=$getData->fetchAll(PDO::FETCH_OBJ);
 
-if($rusult[0]->cut > 0){
-	session_start();
-	$_SESSION["u_email"] = $email;
-}
-} ?>
+	if($rusult[0]->cut > 0){
+		session_start();
+		$_SESSION["u_email"] = $email;
+	}
+	} 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V1</title>
+	<title>Login</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	

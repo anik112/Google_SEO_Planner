@@ -5,7 +5,6 @@ require 'header.php';
 $htmlDom = new simple_html_dom();
 
 $htmlDom->load_file('D:\AnikProgram\Web_Scraping\ss.html');
-
 $key=0;
 
 $volume=findSearchVolume($key,$htmlDom);
@@ -16,7 +15,7 @@ $cpc=findCPC($key, $htmlDom);
 $globalKD=findGlobalKD($key, $htmlDom);
 
 /*foreach($htmlDom->find('table.___STable_1m9ev-ko_ tr') as $data){
-    echo $data;
+echo $data;
 }*/
 
 $lists=find_CPC_COM_PLA_ADS($key, $htmlDom);
@@ -43,7 +42,7 @@ $lists=find_keywordVariantKey_serpAnalysis($key, $htmlDom);
 //table.kwo-serp-table__table tr.___SRow_1m9ev-ko_ td.___SText_158ur-ko_ span.___SText_17rlk-ko_
 
 foreach($htmlDom->find('.kwo-serp-table__url tr.___SRow_1m9ev-ko_ td.___SText_158ur-ko_') as $data){
-    echo $data.'</br>';
+echo $data.'</br>';
 }
 
 $keywordVariantKey=$lists[0];
@@ -65,29 +64,40 @@ if(isset($_POST['submit'])){
 
     $keyword=$_POST['searchContent'];
     $search_key_word = $keyword;
+    $checkSubmit='YES';
+    //D:\AnikProgram\Web_Scraping\test.html
     //$command = escapeshellcmd("python test.py $keyword");
-   // $command = escapeshellcmd("python tst1.py $keyword");
-   // $output = shell_exec($command);
+    // $command = escapeshellcmd("python tst1.py $keyword");
+    // $output = shell_exec($command);
     //$handle = popen("test.py $keyword", 'r');
     //$output = fread($handle, 1024);
     //var_dump($output);
     //pclose($handle);
-
-    $checkSubmit='YES';
-    //D:\AnikProgram\Web_Scraping\test.html
 }else{
     $checkSubmit='NO';
 }
 
-if (isset($_SESSION["u_email"])){
-    echo $_SESSION["u_email"];
-}
-
 ?>
-
+    
 <!-- For backround colour --->
-<div class='container-login100'>
+<div class='container-login100' style='padding-top: 0px;'>
 
+<div class="area" >
+<ul class="circles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
 
 <!-- main container , where we show all eelement -->
 <div class='container'>
@@ -108,7 +118,7 @@ if (isset($_SESSION["u_email"])){
                     <img class='icon' src="../icon/computer.png" alt=""><b> Desktop</b>
                 </i>
                 <i calss='top-head-src-date' style='padding-right: 5px; padding-left: 5px; font-style: normal; font-size: 14px; border-right: solid; border-right-color: #acacac;'>
-                    <img class='icon' src="../icon/calendar.png" alt=""><b> 23-July-2021</b>
+                    <img class='icon' src="../icon/calendar.png" alt=""><b> <?php echo date("d-F-Y");?></b>
                 </i>
                 <i calss='top-head-src-amount-unit ' style='padding-left: 5px; font-style: normal; font-size: 14px;'><b> USD</b></i>
 
@@ -134,8 +144,8 @@ if (isset($_SESSION["u_email"])){
                             <div class='card-body text-light'>
                                 <h6>Keyword Difficulty</h6>
                                 <h3 class='head-reslt-vol'><?php echo $globalKD; ?> % </h3>
-                                <div class="progress">
-                                <div class="progress-bar bg-warning" style="width:70%"><?php echo $globalKD; ?> %</div>
+                                <div class="progress mt-2">
+                                <div class="progress-bar bg-warning" style="width:<?php echo $globalKD;?>%"><?php echo $globalKD; ?> %</div>
                                 </div>
                             </div>
                             <div class='card-body mt-1 text-light'>
@@ -364,7 +374,7 @@ if (isset($_SESSION["u_email"])){
                                 <td>
                                     <a href="<?php echo $serpAnalysis[$i]; ?>" style='font-size: 12px; font-weight: bold; font-style: normal;'><?php echo $serpAnalysis[$i]; ?></a>
                                 </td>
-                                <td style='font-size: 12px; font-weight: bold; font-style: normal; color:#358650;'><?php echo $serpAnalysis[$i+1]; ?></td>
+                                <td style='font-size: 12px; font-weight: bold; font-style: normal; color:#358650;'><?php if (isset($serpAnalysis[$i+1])){ echo $serpAnalysis[$i+1];} ?></td>
                                 </tr>
                                 <?php 
                                 $i++;
@@ -376,14 +386,19 @@ if (isset($_SESSION["u_email"])){
                             </table>
                         </div>
                     </div>
-                    <div class='mt-3'>
+
+                    <div class='mt-5'>
                     <img class='' src="../public/image/demo-banner3.png" alt=""  style='height: 100%; width:100%'>
                     </div>
             </div>
+
         </div>
+
     </div>
 
 </div>
+</div>
+
 </div>
 </div>
 
