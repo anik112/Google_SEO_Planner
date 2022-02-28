@@ -7,12 +7,11 @@
 // get url and trim url
 $url = trim( parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/' );
 
+session_start();
 // database create sassion
 if($url == "dbCreate"){
     require './database/createTable.php';
 }
-
-session_start(); // Start the session.
 
 // set all routes
 $routes = [

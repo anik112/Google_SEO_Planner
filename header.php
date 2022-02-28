@@ -3,13 +3,14 @@ require 'simple_html_dom.php';
 require './controller/deshboardControl.php';
 
 $v_userName = "";
-
 $search_key_word='';
-if(isset($_POST['submit'])){
-    $search_key_word=$_POST['searchContent'];
-    header("Location: deshboard");
+// if(isset($_POST['submit'])){
+//     $search_key_word=$_POST['searchContent'];
+//     //header("Location: deshboard");
+// }
+if($search_key_word == ''){
+    $search_key_word = 'e.g Facebook';
 }
-
 
 if (isset($_SESSION["u_email"])){
     $v_userName = $_SESSION["u_email"];

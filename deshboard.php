@@ -13,6 +13,7 @@ $usSearchVolume=$volume[0];
 $globalSearchVolume=$volume[1];
 $cpc=findCPC($key, $htmlDom);
 $globalKD=findGlobalKD($key, $htmlDom);
+$globalKDStatus=findGlobalKDStatus($key, $htmlDom);
 
 /*foreach($htmlDom->find('table.___STable_1m9ev-ko_ tr') as $data){
 echo $data;
@@ -64,6 +65,7 @@ if(isset($_POST['submit'])){
 
     $keyword=$_POST['searchContent'];
     $search_key_word = $keyword;
+    
     $checkSubmit='YES';
     //D:\AnikProgram\Web_Scraping\test.html
     //$command = escapeshellcmd("python test.py $keyword");
@@ -131,25 +133,26 @@ if(isset($_POST['submit'])){
         </div>
 
         <div class='card p-2 mt-5'>
-            <div class='card-body pl-1 pr-1'>
+            <div class='card-body pl-1 pr-1 mx-5'>
                 <div class='row'>
                     <!-- Show Search volume and global KD -->
                     <div class='col-sm-4'>
-                        <div class='card bg-primary'>
-                            <div class='card-body text-light'>
-                                <h6>Volume</h6>
-                                <h3 class='head-reslt-vol' ><?PHP echo $usSearchVolume; echo ' M';?><img class='icon' style="height: 40px; width: 40px; margin-left:10px;" src="../icon/USA.png" alt="" srcset=""></h3>
+                        <div class='card border-primary'>
+                            <div class='card-body bg-primary m-1' style='border-radius: 2%;'>
+                                <h6 class='text-white'>Volume</h6>
+                                <h3 class='head-reslt-vol text-white' ><?PHP echo $usSearchVolume;?><img class='icon' style="height: 40px; width: 40px; margin-left:10px;" src="../icon/USA.png" alt="" srcset=""></h3>
                             </div>
                             <div class='divider'></div>
-                            <div class='card-body text-light'>
-                                <h6>Keyword Difficulty</h6>
+                            <div class='card-body '>
+                                <h6 style="font-family: 'Lucida Sans', Geneva, Verdana, sans-serif; font-weight: bold; color: rgb(73, 73, 73); margin-bottom: 3px;">Keyword Difficulty</h6>
                                 <h3 class='head-reslt-vol'><?php echo $globalKD; ?> % </h3>
-                                <div class="progress mt-2">
+                                <h6 class='text-danger' style='font-size: 14px;'><?php echo $globalKDStatus; ?></h6>
+                                <div class="progress mt-1">
                                 <div class="progress-bar bg-warning" style="width:<?php echo $globalKD;?>%"><?php echo $globalKD; ?> %</div>
                                 </div>
                             </div>
-                            <div class='card-body mt-1 text-light'>
-                                <p class='text-center text-light' style="font-family: 'Lucida Sans', Geneva, Verdana, sans-serif; font-weight: bold; color: rgb(73, 73, 73); font-size: 12px; margin:0px;">
+                            <div class='card-body p-3'>
+                                <p class='text-center ' style="font-family: 'Lucida Sans', Geneva, Verdana, sans-serif; font-weight: bold; color: rgb(73, 73, 73); font-size: 12px; margin:0px;">
                                 This keyword will demand 437 high authority referring domains and well optimized 
                                 content to start ranking for it.
                                 </p>
@@ -158,7 +161,7 @@ if(isset($_POST['submit'])){
                     </div>
                     <!-- show country -->
                     <div class='col-sm-4'>
-                        <div class='card'>
+                        <div class='card border-primary'>
                             <div class='card-body'>
                                 <h6>Global Volume</h6>
                                 <h3 class='head-reslt-vol'><?php echo $globalSearchVolume; ?> <img src="" alt="" srcset=""></h3>
@@ -166,7 +169,7 @@ if(isset($_POST['submit'])){
                             <div class='divider'></div>
                             <!-- For show country -->
                             <div class='card-body'>
-                                <table class='table mb-2'>
+                                <table class='table mb-3'>
                                     <tbody>
                                         <!-- Show country list -->
                                         <?php foreach($global_country_list as $list): 
@@ -185,21 +188,20 @@ if(isset($_POST['submit'])){
                                         <?php endforeach; ?>
                                     </tbody>
                                 </table>
-                                    
                             </div>
                         </div>
                     </div>
                     <!-- show cpc and com, pla, ads -->
                     <div class='col-sm-4 '>
-                        <div class='card'>
-                            <div class='card-body'>
+                        <div class='card border-primary'>
+                            <div class='card-body py-4'>
                                 <h6>Result</h6>
                                 <h3  class='head-reslt-vol'><?php echo $results;?></h3>
                             </div>
                         </div>    
                         
-                        <div class='card mt-3'>
-                                <div class='card-body py-3'>
+                        <div class='card border-primary mt-4'>
+                                <div class='card-body py-4'>
                                     <div class='row'>
                                         <div class='col'>
                                             <h6>CPC</h6>
@@ -212,7 +214,7 @@ if(isset($_POST['submit'])){
                                     </div>
                                 </div>
                                 <div class='divider'></div>
-                                <div class='card-body py-3'>
+                                <div class='card-body py-4'>
                                     <div class='row'>
                                         <div class='col'>
                                             <h6>PLA</h6>
@@ -361,7 +363,7 @@ if(isset($_POST['submit'])){
                 <div class='card mt-3'>
                         <div class='card-body'>
                             <div class='card-header bg-dark mb-2'>
-                                <h6 style='font-size: 20px; font-weight: bold; font-style: normal; color: white;'>SERP Analysis <small class='text-warning' style='font-size: 12px; font-weight: bold;'> ( Show Top 10 Websites )</small></h6>
+                                <h6 style='font-size: 20px; font-weight: bold; font-style: normal; color: white;'>SERP Analysis <small class='text-warning' style='font-size: 12px; font-weight: bold;'> ( Show Top Websites )</small></h6>
                             </div>
                         <table class="table table-striped p-5">
                             <tbody>
@@ -372,9 +374,13 @@ if(isset($_POST['submit'])){
                                 <tr>
                                 <th scope="row" style='font-size: 12px; font-weight: bold; font-style: normal;'><?php echo $j; ?></th>
                                 <td>
-                                    <a href="<?php echo $serpAnalysis[$i]; ?>" style='font-size: 12px; font-weight: bold; font-style: normal;'><?php echo $serpAnalysis[$i]; ?></a>
+                                    <a href="<?php if (isset($serpAnalysis[$i+1])){ echo $serpAnalysis[$i+1];}?>" target="_blank" style='font-size: 12px; font-weight: bold; font-style: normal;'><?php echo $serpAnalysis[$i]; ?></a>
                                 </td>
-                                <td style='font-size: 12px; font-weight: bold; font-style: normal; color:#358650;'><?php if (isset($serpAnalysis[$i+1])){ echo $serpAnalysis[$i+1];} ?></td>
+                                <td style='font-size: 12px; font-weight: bold; font-style: normal; color:#358650;'>
+                                    <a href="<?php if (isset($serpAnalysis[$i+1])){ echo $serpAnalysis[$i+1];}?>" target="_blank">
+                                        <i class="icon-tag prefix text-primary" style='margin-right: 1px;'></i>
+                                    </a><?php if (isset($serpAnalysis[$i+1])){ echo $serpAnalysis[$i+1];}?>
+                                </td>
                                 </tr>
                                 <?php 
                                 $i++;

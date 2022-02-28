@@ -5,18 +5,19 @@ function findSearchVolume($key, $domFile){
 
         $i=1;
         foreach($domFile->find('.kwo-widget-total') as $data){
-            
+            //echo $data->innertext;
             if(!empty($data)){
                 //echo $data->innertext;
                 switch($i){
                     case 1:
-                        $usSearchVolume=(float)$data->innertext;
+                        $usSearchVolume=$data->innertext;
                         break;
                     case 2:
-                        $globalSearchVolume=(float)$data->innertext;
+                        $globalSearchVolume=$data->innertext;
                         break;
                 }
             }
+            
             $i++;
         }
 
@@ -44,6 +45,22 @@ function findGlobalKD($key, $domFile){
         }
     }
     return $globalKD;
+}
+
+function findGlobalKDStatus($key, $domFile){
+    $globalKDStatus = 'Non';
+    foreach($domFile->find('span.kwo-kd__title') as $data){
+        //echo $data;
+        if(!empty($data)){
+            $globalKDStatus=$data->innertext;
+            //echo $globalKDStatus;
+            break;
+        }else{
+            $globalKDStatus = 'Non';
+        }
+        
+    }
+    return $globalKDStatus;
 }
 
 
@@ -207,6 +224,7 @@ function find_keywordVariantKey_serpAnalysis($key, $domFile){
 
             foreach($data->find('span.___SText_17rlk-ko_') as $s){
                 $keyword=$s->innertext;
+                //echo $keyword;
             }
 
             foreach($data->find('span.kwo-widget-suggestion-done__small-text') as $s){

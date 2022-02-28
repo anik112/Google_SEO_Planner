@@ -12,7 +12,7 @@
 	$rusult=$getData->fetchAll(PDO::FETCH_OBJ);
 
 	if($rusult[0]->cut > 0){
-		session_start();
+		//session_start();
 		$_SESSION["u_email"] = $email;
 	}
 	} 
