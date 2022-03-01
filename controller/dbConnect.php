@@ -4,6 +4,7 @@ $hostName='localhost'; // host name
 $dbName='google_seo_planner_tools'; // database name
 $dbUserName='root'; // database user name
 $dbPassword=''; // database password
+
 global $connect;
 
 

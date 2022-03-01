@@ -1,10 +1,17 @@
 <?php 
 require 'header.php';
 
-
 $htmlDom = new simple_html_dom();
 
-$htmlDom->load_file('D:\AnikProgram\Web_Scraping\ss.html');
+// get keyword and url form database
+if (keywordValidation($connect, $search_key_word)>0){
+    //echo keywordURL($connect, $search_key_word);
+    $htmlDom->load_file(keywordURL($connect, $search_key_word));
+}else{
+    $htmlDom->load_file(keywordURL($connect, 'demo'));
+    $search_key_word =  $search_key_word.'  << not found >>';
+}
+
 $key=0;
 
 $volume=findSearchVolume($key,$htmlDom);
@@ -15,10 +22,6 @@ $cpc=findCPC($key, $htmlDom);
 $globalKD=findGlobalKD($key, $htmlDom);
 $globalKDStatus=findGlobalKDStatus($key, $htmlDom);
 
-/*foreach($htmlDom->find('table.___STable_1m9ev-ko_ tr') as $data){
-echo $data;
-}*/
-
 $lists=find_CPC_COM_PLA_ADS($key, $htmlDom);
 $com=$lists[1];
 $pla=$lists[2];
@@ -27,7 +30,6 @@ $ads=$lists[3];
 $results=findResultData($key, $htmlDom);
 $global_country_list=findGlobalCountryList($key, $htmlDom);
 
-$checkSubmit='NO';
 $lists=find_keyVarint_quesVol_relVol($key, $htmlDom);
 $keyVariationVol=$lists[0];
 $quesVol=$lists[1];
@@ -40,44 +42,12 @@ $relKeyVolTotal=$lists[2];
 
 $lists=find_keywordVariantKey_serpAnalysis($key, $htmlDom);
 
-//table.kwo-serp-table__table tr.___SRow_1m9ev-ko_ td.___SText_158ur-ko_ span.___SText_17rlk-ko_
-
 foreach($htmlDom->find('.kwo-serp-table__url tr.___SRow_1m9ev-ko_ td.___SText_158ur-ko_') as $data){
 echo $data.'</br>';
 }
 
 $keywordVariantKey=$lists[0];
 $serpAnalysis=$lists[1];
-
-
-// get tend data
-// foreach($htmlDom->find('.kwo-trend-bar') as $data){
-//     echo $data;
-//     // if(!empty($data)){
-//     //     $results=$data->innertext;
-//     //     break;
-//     // }
-// }
-
-
-// get main result information
-if(isset($_POST['submit'])){
-
-    $keyword=$_POST['searchContent'];
-    $search_key_word = $keyword;
-    
-    $checkSubmit='YES';
-    //D:\AnikProgram\Web_Scraping\test.html
-    //$command = escapeshellcmd("python test.py $keyword");
-    // $command = escapeshellcmd("python tst1.py $keyword");
-    // $output = shell_exec($command);
-    //$handle = popen("test.py $keyword", 'r');
-    //$output = fread($handle, 1024);
-    //var_dump($output);
-    //pclose($handle);
-}else{
-    $checkSubmit='NO';
-}
 
 ?>
     
@@ -111,7 +81,7 @@ if(isset($_POST['submit'])){
     <div class='col-lg-12 mt-5'>
        
     <div class='keyword-header'>
-            <h3><Strong style='color: rgb(223, 221, 221);;'>Keyword Overview: </Strong><i style='font-style: normal; color: white'><?php echo $search_key_word;?></i></h3>
+            <h3><Strong style='color: rgb(223, 221, 221);;'>Keyword Overview:   </Strong><i style='font-style: normal; color: #ffc107'><?php echo $search_key_word;?></i></h3>
             <div class='mt-3'>
                 <i calss='top-head-src-country' style='padding-right: 5px; font-style: normal; font-size: 14px; border-right: solid; border-right-color: #acacac;'>
                     <img class='icon' src="../icon/USA.png" alt=""><a href="#"><b class='text-warning'> US</b></a>
@@ -148,7 +118,7 @@ if(isset($_POST['submit'])){
                                 <h3 class='head-reslt-vol'><?php echo $globalKD; ?> % </h3>
                                 <h6 class='text-danger' style='font-size: 14px;'><?php echo $globalKDStatus; ?></h6>
                                 <div class="progress mt-1">
-                                <div class="progress-bar bg-warning" style="width:<?php echo $globalKD;?>%"><?php echo $globalKD; ?> %</div>
+                                <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" style="width:<?php echo $globalKD;?>%"><?php echo $globalKD; ?> %</div>
                                 </div>
                             </div>
                             <div class='card-body p-3'>
@@ -180,7 +150,7 @@ if(isset($_POST['submit'])){
                                             <td class='col-6 py-1'> 
                                                 <div class="progress">
                                                     <!--<img class='icon' src="../icon/US.png" alt="" srcset="">-->
-                                                    <div class="progress-bar progress-bar-striped bg-succcess" role="progressbar" style="width: <?php echo $devidor[2]; ?>;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">   </div>
+                                                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: <?php echo $devidor[2]; ?>;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">   </div>
                                                 </div>
                                             </td>
                                             <td class='col-3 py-1'><p style="font-family: 'Lucida Sans', Geneva, Verdana, sans-serif; font-weight: bold; color: red; margin: 0px 5px 0px 5px; font-size: 10px;"> <?php echo $devidor[1].' '; ?></p></td>
@@ -410,5 +380,36 @@ if(isset($_POST['submit'])){
 
 <?php require 'footer.php' ?>
 
+<?php
 
+/*foreach($htmlDom->find('table.___STable_1m9ev-ko_ tr') as $data){
+echo $data;
+}*/
+//$htmlDom->load_file('D:\AnikProgram\Web_Scraping\storage\cat.html');
+// get tend data
+// foreach($htmlDom->find('.kwo-trend-bar') as $data){
+//     echo $data;
+//     // if(!empty($data)){
+//     //     $results=$data->innertext;
+//     //     break;
+//     // }
+// }
+// get main result information
+// if(isset($_POST['submit'])){
+//     $keyword=$_POST['searchContent'];
+//     $search_key_word = $keyword;
+//     $checkSubmit='YES';
+//     //D:\AnikProgram\Web_Scraping\test.html
+//     //$command = escapeshellcmd("python test.py $keyword");
+//     // $command = escapeshellcmd("python tst1.py $keyword");
+//     // $output = shell_exec($command);
+//     //$handle = popen("test.py $keyword", 'r');
+//     //$output = fread($handle, 1024);
+//     //var_dump($output);
+//     //pclose($handle);
+// }else{
+//     $checkSubmit='NO';
+// }
+
+?>
  

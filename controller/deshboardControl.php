@@ -76,6 +76,7 @@ function findResultData($key, $domFile){
     return $results;
 }
 
+
 function find_CPC_COM_PLA_ADS($key, $domFile){
     $cpc=0;
     $com=0;

@@ -1,20 +1,39 @@
 <?php
 require 'simple_html_dom.php';
 require './controller/deshboardControl.php';
+require './controller/databaseFunction.php';
+require './controller/dbConnect.php';
 
 $v_userName = "";
 $search_key_word='';
-// if(isset($_POST['submit'])){
-//     $search_key_word=$_POST['searchContent'];
-//     //header("Location: deshboard");
-// }
-if($search_key_word == ''){
-    $search_key_word = 'e.g Facebook';
-}
+$checkSubmit='NO';
+$loginURL = 'deshboard';
+$v_uType = 'USER';
 
 if (isset($_SESSION["u_email"])){
     $v_userName = $_SESSION["u_email"];
 }
+
+if(isset($_POST['submit'])){
+    $search_key_word=$_POST['searchContent'];
+    inser_log($connect, $search_key_word, $v_userName);
+    $checkSubmit='YES';
+}else{
+    $checkSubmit='NO';
+}
+
+if($search_key_word == ''){
+    $search_key_word = 'demo';
+}
+
+
+$v_uType = get_user_type($connect,$v_userName);
+if($v_uType=='ADMIN'){
+    $loginURL = 'admin';
+}else{
+    $loginURL = 'deshboard';
+}
+
 
 
 ?>
@@ -111,9 +130,7 @@ if (isset($_SESSION["u_email"])){
                             style='border-top-left-radius: 0px; border-bottom-left-radius: 0px;'>
                     </div>
                 </div>
-                <a href="deshboard">Login By:
-                    <?php echo $v_userName; ?>
-                </a>
+                <a href="<?php echo $loginURL; ?>">Login By: <?php echo $v_userName; ?> </a>
             </form>
         </div>
 

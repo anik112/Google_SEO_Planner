@@ -5,11 +5,12 @@
 // echo $output;
 
 // get url and trim url
-$url = trim( parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/' );
+$url = explode("/",trim( parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/' ));
 
 session_start();
+
 // database create sassion
-if($url == "dbCreate"){
+if($url[0] == "dbCreate"){
     require './database/createTable.php';
 }
 
@@ -18,7 +19,8 @@ $routes = [
     'deshboard' => 'deshboard.php',
     'contact' => 'contact.php',
     'login' => 'login.php',
-    'search' => 'search.php'
+    'search' => 'search.php',
+    'admin' => 'admin.php'
 ];
 
 
@@ -26,13 +28,13 @@ $basedPage='search';
 
 // echo $url;
 
-if($url == null){
+if($url[0] == null){
     header("Location: search");
 }else{
     //if(isset($_SESSION['userId']) > 0){
         // check request url have in this routes
-        if(array_key_exists($url, $routes)){
-            require $routes[$url];
+        if(array_key_exists($url[0], $routes)){
+            require $routes[$url[0]];
         }else{
             echo 'file not found!';
         }

@@ -14,6 +14,7 @@
 	if($rusult[0]->cut > 0){
 		//session_start();
 		$_SESSION["u_email"] = $email;
+		header( 'Location: search' );
 	}
 	} 
 ?>
@@ -53,7 +54,7 @@
 
             <form class="login100-form validate-form" action="user_create.php"  method="post">
 					<span class="login100-form-title">
-						Member Regristration
+						Member Registration
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
@@ -156,3 +157,5 @@
 
 </body>
 </html>
+
+<?php require 'footer.php' ?>
